@@ -1,0 +1,1300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client Portal - J BuildSecure Group</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #002b5c;
+            --secondary: #01427a;
+            --accent: #ffe600;
+            --bg: #f8fafc;
+            --white: #fff;
+            --shadow: 0 4px 24px rgba(0,0,0,0.07);
+            --border: #e2e8f0;
+            --text: #1a2233;
+            --text-light: #64748b;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+        }
+        body {
+            font-family: 'Inter', 'Montserrat', Arial, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 0;
+            line-height: 1.7;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        header {
+            background: var(--primary);
+            color: var(--white);
+            box-shadow: var(--shadow);
+        }
+        .header-top {
+            background: #00305e;
+            color: var(--white);
+            text-align: center;
+            padding: 1.2rem 1rem 0.8rem;
+        }
+        .logo {
+            font-size: 2.5rem;
+            font-weight: 700;
+            font-family: 'Montserrat', Arial, sans-serif;
+            letter-spacing: 1px;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        .tagline {
+            font-size: 1.2rem;
+            display: block;
+            margin-bottom: 1rem;
+            color: #fff;
+        }
+        .nav-container {
+            background: #00407d;
+            box-shadow: var(--shadow);
+        }
+        .main-nav {
+            display: flex;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0.5rem 1rem;
+        }
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            align-items: center;
+        }
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 600;
+            white-space: nowrap;
+            padding: 0.5rem 0;
+        }
+        .nav-links a:hover {
+            color: #ffe600;
+        }
+        .nav-links a.active {
+            color: #ffe600;
+        }
+        .user-menu {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: var(--white);
+        }
+        .user-menu .user-name {
+            font-weight: 600;
+        }
+        .user-menu .logout-btn {
+            background: var(--accent);
+            color: var(--primary);
+            border: none;
+            border-radius: 8px;
+            padding: 0.5rem 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: background 0.2s, color 0.2s;
+        }
+        .user-menu .logout-btn:hover {
+            background: var(--white);
+        }
+        .portal-container {
+            display: flex;
+            flex: 1;
+            max-width: 1200px;
+            margin: 2rem auto;
+            gap: 2rem;
+            padding: 0 1rem;
+        }
+        .sidebar {
+            width: 250px;
+            background: var(--white);
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            padding: 1.5rem;
+            flex-shrink: 0;
+            height: fit-content;
+        }
+        .sidebar-menu {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .sidebar-menu li {
+            margin-bottom: 0.5rem;
+        }
+        .sidebar-menu a {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1rem;
+            color: var(--text);
+            text-decoration: none;
+            border-radius: 8px;
+            transition: background 0.2s, color 0.2s;
+        }
+        .sidebar-menu a:hover {
+            background: #f1f5f9;
+        }
+        .sidebar-menu a.active {
+            background: var(--primary);
+            color: var(--white);
+        }
+        .sidebar-menu i {
+            width: 20px;
+            text-align: center;
+        }
+        .content {
+            flex: 1;
+            background: var(--white);
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            padding: 2rem;
+        }
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+        .dashboard-header h1 {
+            color: var(--primary);
+            margin: 0;
+            font-size: 1.8rem;
+        }
+        .date-display {
+            color: var(--text-light);
+            font-size: 1.1rem;
+        }
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .stat-card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+        }
+        .stat-card .stat-title {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            margin-bottom: 0.5rem;
+        }
+        .stat-card .stat-value {
+            color: var(--primary);
+            font-size: 1.7rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        .stat-card .stat-description {
+            color: var(--text);
+            font-size: 0.9rem;
+        }
+        .content-section {
+            margin-bottom: 2rem;
+        }
+        .content-section h2 {
+            color: var(--primary);
+            margin-bottom: 1.25rem;
+            font-size: 1.4rem;
+        }
+        .content-card {
+            background: #f8fafc;
+            border-radius: 10px;
+            padding: 1.25rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--primary);
+        }
+        .content-card h3 {
+            color: var(--primary);
+            margin-top: 0;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+        .content-card p {
+            margin: 0;
+            font-size: 0.95rem;
+        }
+        .notification {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 1rem;
+        }
+        .notification:last-child {
+            margin-bottom: 0;
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+        .notification .icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #f1f5f9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            flex-shrink: 0;
+        }
+        .notification .content {
+            flex: 1;
+            padding: 0;
+            box-shadow: none;
+            background: transparent;
+        }
+        .notification .title {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+        .notification .time {
+            color: var(--text-light);
+            font-size: 0.85rem;
+        }
+        .action-btn {
+            background: var(--primary);
+            color: var(--white);
+            border: none;
+            border-radius: 8px;
+            padding: 0.6rem 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 0.95rem;
+            transition: background 0.2s;
+        }
+        .action-btn:hover {
+            background: var(--secondary);
+        }
+        .action-btn.outline {
+            background: transparent;
+            color: var(--primary);
+            border: 1px solid var(--primary);
+        }
+        .action-btn.outline:hover {
+            background: var(--primary);
+            color: var(--white);
+        }
+        .job-card {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem;
+            background: #f8fafc;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--primary);
+        }
+        .job-card:last-child {
+            margin-bottom: 0;
+        }
+        .job-info {
+            flex: 1;
+        }
+        .job-title {
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 0.25rem;
+            font-size: 1.1rem;
+        }
+        .job-location {
+            font-size: 0.95rem;
+            color: var(--text);
+            margin-bottom: 0.25rem;
+        }
+        .job-meta {
+            display: flex;
+            gap: 1rem;
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+        .job-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        .badge.success {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--success);
+        }
+        .badge.warning {
+            background: rgba(245, 158, 11, 0.1);
+            color: var(--warning);
+        }
+        .badge.danger {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--danger);
+        }
+        .badge.info {
+            background: rgba(14, 165, 233, 0.1);
+            color: #0ea5e9;
+        }
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--text);
+        }
+        .form-control {
+            width: 100%;
+            padding: 0.7rem;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            font-family: inherit;
+            font-size: 1rem;
+        }
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(0, 43, 92, 0.1);
+        }
+        textarea.form-control {
+            min-height: 100px;
+            resize: vertical;
+        }
+        .candidate-card {
+            display: flex;
+            padding: 1.25rem;
+            background: #f8fafc;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--primary);
+            gap: 1.5rem;
+        }
+        .candidate-photo {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: #e2e8f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+        .candidate-info {
+            flex: 1;
+        }
+        .candidate-name {
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 0.25rem;
+            font-size: 1.1rem;
+        }
+        .candidate-position {
+            font-size: 0.95rem;
+            color: var(--text);
+            margin-bottom: 0.5rem;
+        }
+        .candidate-meta {
+            display: flex;
+            gap: 1.5rem;
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+        }
+        .candidate-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        .candidate-tag {
+            background: #e2e8f0;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            color: var(--text);
+        }
+        .candidate-actions {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+        .candidate-status {
+            margin-right: 0.5rem;
+        }
+        .modal-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            display: none;
+        }
+        .modal {
+            background: var(--white);
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            width: 90%;
+            max-width: 600px;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        .modal-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .modal-title {
+            font-weight: 700;
+            color: var(--primary);
+            margin: 0;
+            font-size: 1.3rem;
+        }
+        .modal-close {
+            background: transparent;
+            border: none;
+            color: var(--text-light);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        .modal-body {
+            padding: 1.5rem;
+        }
+        .modal-footer {
+            padding: 1.5rem;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+        }
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 1.5rem;
+        }
+        .tab {
+            padding: 0.75rem 1.5rem;
+            font-weight: 600;
+            color: var(--text-light);
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+        }
+        .tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+        }
+        /* For active tab/content management */
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .message-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .message-card {
+            border-left: 4px solid var(--secondary);
+        }
+        @media (max-width: 900px) {
+            .portal-container {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+            .sidebar {
+                width: 100%;
+                margin-bottom: 1rem;
+            }
+        }
+        @media (max-width: 600px) {
+            .content {
+                padding: 1rem;
+            }
+            .dashboard-header h1, .content-section h2, .content-section h1 {
+                font-size: 1.1rem;
+            }
+            .sidebar {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>        <div class="header-top">
+            <a href="index.html" style="text-decoration: none; color: inherit;">
+                <span class="logo">J BuildSecure Group</span>
+                <span class="tagline">Recruitment Specialists</span>
+            </a>
+        </div>
+        <div class="nav-container">
+            <div class="main-nav">
+                <div class="nav-links">
+                    <a href="client-portal.html" class="active">Portal Home</a>
+                    <a href="#jobs">My Jobs</a>
+                    <a href="#candidates">Candidates</a>
+                    <a href="#placements">Placements</a>
+                    <a href="#invoices">Invoices</a>
+                </div>
+                <div class="user-menu">
+                    <span class="user-name">London Bridge Construction Ltd</span>
+                    <a href="client-login.html" class="logout-btn">Logout</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="portal-container">
+        <aside class="sidebar">
+            <ul class="sidebar-menu">
+                <li><a href="#dashboard" class="active" data-tab="dashboard"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                <li><a href="#jobs" data-tab="jobs"><i class="fas fa-briefcase"></i> My Jobs</a></li>
+                <li><a href="#post-job" data-tab="post-job"><i class="fas fa-plus-circle"></i> Post a Job</a></li>
+                <li><a href="#candidates" data-tab="candidates"><i class="fas fa-users"></i> Candidates</a></li>
+                <li><a href="#placements" data-tab="placements"><i class="fas fa-handshake"></i> Placements</a></li>
+                <li><a href="#invoices" data-tab="invoices"><i class="fas fa-file-invoice-dollar"></i> Invoices</a></li>
+                <li><a href="#messages" data-tab="messages"><i class="fas fa-envelope"></i> Messages</a></li>
+                <li><a href="#account" data-tab="account"><i class="fas fa-cog"></i> Account Settings</a></li>
+            </ul>
+        </aside>
+
+        <main class="content">
+            <!-- Dashboard Tab -->
+            <div id="dashboard" class="tab-content active">
+                <div class="dashboard-header">
+                    <h1>Client Dashboard</h1>
+                    <div class="date-display">
+                        <span id="current-date">Friday, June 14, 2025</span>
+                    </div>
+                </div>
+
+                <div class="dashboard-grid">
+                    <div class="stat-card">
+                        <div class="stat-title">Active Job Postings</div>
+                        <div class="stat-value">8</div>
+                        <div class="stat-description">3 jobs added this month</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-title">Candidate Applications</div>
+                        <div class="stat-value">42</div>
+                        <div class="stat-description">15 new this week</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-title">Successful Placements</div>
+                        <div class="stat-value">5</div>
+                        <div class="stat-description">This year</div>
+                    </div>
+                </div>
+
+                <div class="content-section">
+                    <h2>Recent Job Activity</h2>
+                    <div class="job-card">
+                        <div class="job-info">
+                            <div class="job-title">Senior Construction Manager</div>
+                            <div class="job-location">London, UK</div>
+                            <div class="job-meta">
+                                <span><i class="far fa-clock"></i> Posted 2 days ago</span>
+                                <span><i class="far fa-user"></i> 12 applicants</span>
+                                <span><i class="far fa-eye"></i> 145 views</span>
+                            </div>
+                        </div>
+                        <div class="job-actions">
+                            <span class="badge success">Active</span>
+                            <button class="action-btn outline">View Candidates</button>
+                        </div>
+                    </div>
+                    <div class="job-card">
+                        <div class="job-info">
+                            <div class="job-title">Safety Inspector</div>
+                            <div class="job-location">Birmingham, UK</div>
+                            <div class="job-meta">
+                                <span><i class="far fa-clock"></i> Posted 5 days ago</span>
+                                <span><i class="far fa-user"></i> 8 applicants</span>
+                                <span><i class="far fa-eye"></i> 98 views</span>
+                            </div>
+                        </div>
+                        <div class="job-actions">
+                            <span class="badge success">Active</span>
+                            <button class="action-btn outline">View Candidates</button>
+                        </div>
+                    </div>
+                    <div class="job-card">
+                        <div class="job-info">
+                            <div class="job-title">Site Security Officer</div>
+                            <div class="job-location">Manchester, UK</div>
+                            <div class="job-meta">
+                                <span><i class="far fa-clock"></i> Posted 1 week ago</span>
+                                <span><i class="far fa-user"></i> 15 applicants</span>
+                                <span><i class="far fa-eye"></i> 203 views</span>
+                            </div>
+                        </div>
+                        <div class="job-actions">
+                            <span class="badge warning">Shortlisting</span>
+                            <button class="action-btn outline">View Candidates</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content-section">
+                    <h2>Recent Candidates</h2>
+                    <div class="candidate-card">
+                        <div class="candidate-photo">JS</div>
+                        <div class="candidate-info">
+                            <div class="candidate-name">John Smith</div>
+                            <div class="candidate-position">Senior Construction Manager</div>
+                            <div class="candidate-meta">
+                                <span><i class="far fa-map"></i> London, UK</span>
+                                <span><i class="far fa-calendar"></i> 8+ years experience</span>
+                                <span><i class="far fa-clock"></i> Applied 1 day ago</span>
+                            </div>
+                            <div class="candidate-tags">
+                                <span class="candidate-tag">Project Management</span>
+                                <span class="candidate-tag">Team Leadership</span>
+                                <span class="candidate-tag">Budget Control</span>
+                            </div>
+                        </div>
+                        <div class="candidate-actions">
+                            <span class="badge info candidate-status">New</span>
+                            <button class="action-btn outline">View Profile</button>
+                        </div>
+                    </div>
+                    <div class="candidate-card">
+                        <div class="candidate-photo">ET</div>
+                        <div class="candidate-info">
+                            <div class="candidate-name">Emma Thompson</div>
+                            <div class="candidate-position">Safety Inspector</div>
+                            <div class="candidate-meta">
+                                <span><i class="far fa-map"></i> Birmingham, UK</span>
+                                <span><i class="far fa-calendar"></i> 5 years experience</span>
+                                <span><i class="far fa-clock"></i> Applied 2 days ago</span>
+                            </div>
+                            <div class="candidate-tags">
+                                <span class="candidate-tag">Safety Compliance</span>
+                                <span class="candidate-tag">Risk Assessment</span>
+                                <span class="candidate-tag">NEBOSH Certified</span>
+                            </div>
+                        </div>
+                        <div class="candidate-actions">
+                            <span class="badge info candidate-status">New</span>
+                            <button class="action-btn outline">View Profile</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content-section">
+                    <h2>Quick Actions</h2>
+                    <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                        <button class="action-btn"><i class="fas fa-plus-circle mr-2"></i> Post New Job</button>
+                        <button class="action-btn"><i class="fas fa-search mr-2"></i> Search Candidates</button>
+                        <button class="action-btn"><i class="fas fa-envelope mr-2"></i> Contact Account Manager</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Jobs Tab -->
+            <div id="jobs" class="tab-content">
+                <h1>My Jobs</h1>
+                <div class="content-section">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                        <div class="tabs">
+                            <div class="tab active" data-tab-filter="all">All Jobs</div>
+                            <div class="tab" data-tab-filter="active">Active</div>
+                            <div class="tab" data-tab-filter="filled">Filled</div>
+                            <div class="tab" data-tab-filter="closed">Closed</div>
+                        </div>
+                        <button class="action-btn">Post New Job</button>
+                    </div>
+
+                    <div class="job-card">
+                        <div class="job-info">
+                            <div class="job-title">Senior Construction Manager</div>
+                            <div class="job-location">London, UK</div>
+                            <div class="job-meta">
+                                <span><i class="far fa-clock"></i> Posted 2 days ago</span>
+                                <span><i class="far fa-user"></i> 12 applicants</span>
+                                <span><i class="far fa-calendar-alt"></i> Expires in 28 days</span>
+                            </div>
+                        </div>
+                        <div class="job-actions">
+                            <span class="badge success">Active</span>
+                            <button class="action-btn outline">Edit</button>
+                            <button class="action-btn outline">View Candidates</button>
+                        </div>
+                    </div>
+                    <div class="job-card">
+                        <div class="job-info">
+                            <div class="job-title">Safety Inspector</div>
+                            <div class="job-location">Birmingham, UK</div>
+                            <div class="job-meta">
+                                <span><i class="far fa-clock"></i> Posted 5 days ago</span>
+                                <span><i class="far fa-user"></i> 8 applicants</span>
+                                <span><i class="far fa-calendar-alt"></i> Expires in 25 days</span>
+                            </div>
+                        </div>
+                        <div class="job-actions">
+                            <span class="badge success">Active</span>
+                            <button class="action-btn outline">Edit</button>
+                            <button class="action-btn outline">View Candidates</button>
+                        </div>
+                    </div>
+                    <div class="job-card">
+                        <div class="job-info">
+                            <div class="job-title">Site Security Officer</div>
+                            <div class="job-location">Manchester, UK</div>
+                            <div class="job-meta">
+                                <span><i class="far fa-clock"></i> Posted 1 week ago</span>
+                                <span><i class="far fa-user"></i> 15 applicants</span>
+                                <span><i class="far fa-calendar-alt"></i> Expires in 23 days</span>
+                            </div>
+                        </div>
+                        <div class="job-actions">
+                            <span class="badge warning">Shortlisting</span>
+                            <button class="action-btn outline">Edit</button>
+                            <button class="action-btn outline">View Candidates</button>
+                        </div>
+                    </div>
+                    <div class="job-card">
+                        <div class="job-info">
+                            <div class="job-title">Electrical Engineer</div>
+                            <div class="job-location">Liverpool, UK</div>
+                            <div class="job-meta">
+                                <span><i class="far fa-clock"></i> Posted 2 weeks ago</span>
+                                <span><i class="far fa-user"></i> 7 applicants</span>
+                                <span><i class="far fa-calendar-alt"></i> Expires in 16 days</span>
+                            </div>
+                        </div>
+                        <div class="job-actions">
+                            <span class="badge success">Active</span>
+                            <button class="action-btn outline">Edit</button>
+                            <button class="action-btn outline">View Candidates</button>
+                        </div>
+                    </div>
+                    <div class="job-card">
+                        <div class="job-info">
+                            <div class="job-title">Project Coordinator</div>
+                            <div class="job-location">London, UK</div>
+                            <div class="job-meta">
+                                <span><i class="far fa-clock"></i> Posted 3 weeks ago</span>
+                                <span><i class="far fa-user"></i> 23 applicants</span>
+                                <span><i class="far fa-check-circle"></i> Filled on June 8, 2025</span>
+                            </div>
+                        </div>
+                        <div class="job-actions">
+                            <span class="badge success">Filled</span>
+                            <button class="action-btn outline">View Details</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Post Job Tab -->
+            <div id="post-job" class="tab-content">
+                <h1>Post a New Job</h1>
+                <div class="content-section">
+                    <form id="post-job-form">
+                        <div class="form-group">
+                            <label for="job-title">Job Title*</label>
+                            <input type="text" id="job-title" class="form-control" placeholder="e.g. Construction Site Manager" required>
+                        </div>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+                            <div class="form-group">
+                                <label for="job-location">Location*</label>
+                                <input type="text" id="job-location" class="form-control" placeholder="e.g. London, UK" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="job-type">Job Type*</label>
+                                <select id="job-type" class="form-control" required>
+                                    <option value="">Select Job Type</option>
+                                    <option value="full-time">Full-time</option>
+                                    <option value="part-time">Part-time</option>
+                                    <option value="contract">Contract</option>
+                                    <option value="temporary">Temporary</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+                            <div class="form-group">
+                                <label for="salary-min">Salary Range (£)*</label>
+                                <div style="display: flex; gap: 1rem;">
+                                    <input type="number" id="salary-min" class="form-control" placeholder="Min" required>
+                                    <input type="number" id="salary-max" class="form-control" placeholder="Max" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="experience">Experience Required*</label>
+                                <select id="experience" class="form-control" required>
+                                    <option value="">Select Experience</option>
+                                    <option value="entry">Entry Level</option>
+                                    <option value="mid">Mid Level (1-3 years)</option>
+                                    <option value="senior">Senior Level (3-5 years)</option>
+                                    <option value="expert">Expert Level (5+ years)</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="job-description">Job Description*</label>
+                            <textarea id="job-description" class="form-control" placeholder="Provide a detailed description of the job role, responsibilities, and requirements..." required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="job-requirements">Key Requirements*</label>
+                            <textarea id="job-requirements" class="form-control" placeholder="List the key qualifications, skills, and experience required for this position..." required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="job-benefits">Benefits</label>
+                            <textarea id="job-benefits" class="form-control" placeholder="List the benefits, perks, and incentives offered with this position..."></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="application-deadline">Application Deadline*</label>
+                            <input type="date" id="application-deadline" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="application-instructions">Application Instructions</label>
+                            <textarea id="application-instructions" class="form-control" placeholder="Provide any specific instructions for candidates applying to this position..."></textarea>
+                        </div>
+                        <div style="display: flex; justify-content: flex-end; gap: 1rem;">
+                            <button type="button" class="action-btn outline">Save as Draft</button>
+                            <button type="submit" class="action-btn">Post Job</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Candidates Tab -->
+            <div id="candidates" class="tab-content">
+                <h1>Candidates</h1>
+                <div class="content-section">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                        <div class="tabs">
+                            <div class="tab active" data-candidate-filter="all">All Candidates</div>
+                            <div class="tab" data-candidate-filter="new">New</div>
+                            <div class="tab" data-candidate-filter="shortlisted">Shortlisted</div>
+                            <div class="tab" data-candidate-filter="interviewed">Interviewed</div>
+                            <div class="tab" data-candidate-filter="offered">Offered</div>
+                            <div class="tab" data-candidate-filter="hired">Hired</div>
+                        </div>
+                        <div style="display: flex; gap: 1rem;">
+                            <input type="text" placeholder="Search candidates..." class="form-control" style="width: 250px;">
+                            <button class="action-btn outline">Search</button>
+                        </div>
+                    </div>
+
+                    <div class="candidate-card">
+                        <div class="candidate-photo">JS</div>
+                        <div class="candidate-info">
+                            <div class="candidate-name">John Smith</div>
+                            <div class="candidate-position">Senior Construction Manager</div>
+                            <div class="candidate-meta">
+                                <span><i class="far fa-map"></i> London, UK</span>
+                                <span><i class="far fa-calendar"></i> 8+ years experience</span>
+                                <span><i class="far fa-clock"></i> Applied 1 day ago</span>
+                            </div>
+                            <div class="candidate-tags">
+                                <span class="candidate-tag">Project Management</span>
+                                <span class="candidate-tag">Team Leadership</span>
+                                <span class="candidate-tag">Budget Control</span>
+                            </div>
+                        </div>
+                        <div class="candidate-actions">
+                            <span class="badge info candidate-status">New</span>
+                            <button class="action-btn outline">View CV</button>
+                            <button class="action-btn outline">Shortlist</button>
+                        </div>
+                    </div>
+                    <div class="candidate-card">
+                        <div class="candidate-photo">ET</div>
+                        <div class="candidate-info">
+                            <div class="candidate-name">Emma Thompson</div>
+                            <div class="candidate-position">Safety Inspector</div>
+                            <div class="candidate-meta">
+                                <span><i class="far fa-map"></i> Birmingham, UK</span>
+                                <span><i class="far fa-calendar"></i> 5 years experience</span>
+                                <span><i class="far fa-clock"></i> Applied 2 days ago</span>
+                            </div>
+                            <div class="candidate-tags">
+                                <span class="candidate-tag">Safety Compliance</span>
+                                <span class="candidate-tag">Risk Assessment</span>
+                                <span class="candidate-tag">NEBOSH Certified</span>
+                            </div>
+                        </div>
+                        <div class="candidate-actions">
+                            <span class="badge info candidate-status">New</span>
+                            <button class="action-btn outline">View CV</button>
+                            <button class="action-btn outline">Shortlist</button>
+                        </div>
+                    </div>
+                    <div class="candidate-card">
+                        <div class="candidate-photo">MD</div>
+                        <div class="candidate-info">
+                            <div class="candidate-name">Michael Davis</div>
+                            <div class="candidate-position">Site Security Officer</div>
+                            <div class="candidate-meta">
+                                <span><i class="far fa-map"></i> Manchester, UK</span>
+                                <span><i class="far fa-calendar"></i> 3 years experience</span>
+                                <span><i class="far fa-clock"></i> Applied 3 days ago</span>
+                            </div>
+                            <div class="candidate-tags">
+                                <span class="candidate-tag">Security License</span>
+                                <span class="candidate-tag">First Aid</span>
+                                <span class="candidate-tag">CCTV Monitoring</span>
+                            </div>
+                        </div>
+                        <div class="candidate-actions">
+                            <span class="badge warning candidate-status">Shortlisted</span>
+                            <button class="action-btn outline">View CV</button>
+                            <button class="action-btn outline">Schedule Interview</button>
+                        </div>
+                    </div>
+                    <div class="candidate-card">
+                        <div class="candidate-photo">RJ</div>
+                        <div class="candidate-info">
+                            <div class="candidate-name">Rachel Johnson</div>
+                            <div class="candidate-position">Electrical Engineer</div>
+                            <div class="candidate-meta">
+                                <span><i class="far fa-map"></i> Liverpool, UK</span>
+                                <span><i class="far fa-calendar"></i> 6 years experience</span>
+                                <span><i class="far fa-clock"></i> Applied 5 days ago</span>
+                            </div>
+                            <div class="candidate-tags">
+                                <span class="candidate-tag">Electrical Systems</span>
+                                <span class="candidate-tag">AutoCAD</span>
+                                <span class="candidate-tag">Building Regulations</span>
+                            </div>
+                        </div>
+                        <div class="candidate-actions">
+                            <span class="badge success candidate-status">Interviewed</span>
+                            <button class="action-btn outline">View CV</button>
+                            <button class="action-btn outline">Make Offer</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Placements Tab -->
+            <div id="placements" class="tab-content">
+                <h1>Placements</h1>
+                <div class="content-section">
+                    <h2>Recent Placements</h2>
+                    <table style="width: 100%; border-collapse: collapse;">
+                        <thead>
+                            <tr style="border-bottom: 1px solid var(--border);">
+                                <th style="text-align: left; padding: 0.75rem; font-weight: 600;">Candidate</th>
+                                <th style="text-align: left; padding: 0.75rem; font-weight: 600;">Position</th>
+                                <th style="text-align: left; padding: 0.75rem; font-weight: 600;">Start Date</th>
+                                <th style="text-align: left; padding: 0.75rem; font-weight: 600;">Placement Fee</th>
+                                <th style="text-align: left; padding: 0.75rem; font-weight: 600;">Status</th>
+                                <th style="text-align: left; padding: 0.75rem; font-weight: 600;">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="border-bottom: 1px solid var(--border);">
+                                <td style="padding: 0.75rem;">Sarah Williams</td>
+                                <td style="padding: 0.75rem;">Project Coordinator</td>
+                                <td style="padding: 0.75rem;">June 10, 2025</td>
+                                <td style="padding: 0.75rem;">£4,800</td>
+                                <td style="padding: 0.75rem;"><span class="badge success">Active</span></td>
+                                <td style="padding: 0.75rem;">
+                                    <button class="action-btn outline" style="padding: 0.4rem 0.7rem; font-size: 0.85rem;">View Details</button>
+                                </td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid var(--border);">
+                                <td style="padding: 0.75rem;">David Cooper</td>
+                                <td style="padding: 0.75rem;">Quantity Surveyor</td>
+                                <td style="padding: 0.75rem;">May 15, 2025</td>
+                                <td style="padding: 0.75rem;">£5,200</td>
+                                <td style="padding: 0.75rem;"><span class="badge success">Active</span></td>
+                                <td style="padding: 0.75rem;">
+                                    <button class="action-btn outline" style="padding: 0.4rem 0.7rem; font-size: 0.85rem;">View Details</button>
+                                </td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid var(--border);">
+                                <td style="padding: 0.75rem;">Jessica Moore</td>
+                                <td style="padding: 0.75rem;">Health & Safety Manager</td>
+                                <td style="padding: 0.75rem;">April 8, 2025</td>
+                                <td style="padding: 0.75rem;">£6,100</td>
+                                <td style="padding: 0.75rem;"><span class="badge success">Active</span></td>
+                                <td style="padding: 0.75rem;">
+                                    <button class="action-btn outline" style="padding: 0.4rem 0.7rem; font-size: 0.85rem;">View Details</button>
+                                </td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid var(--border);">
+                                <td style="padding: 0.75rem;">Mark Wilson</td>
+                                <td style="padding: 0.75rem;">Site Engineer</td>
+                                <td style="padding: 0.75rem;">March 22, 2025</td>
+                                <td style="padding: 0.75rem;">£4,900</td>
+                                <td style="padding: 0.75rem;"><span class="badge success">Active</span></td>
+                                <td style="padding: 0.75rem;">
+                                    <button class="action-btn outline" style="padding: 0.4rem 0.7rem; font-size: 0.85rem;">View Details</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 0.75rem;">Lisa Taylor</td>
+                                <td style="padding: 0.75rem;">Administrative Assistant</td>
+                                <td style="padding: 0.75rem;">February 15, 2025</td>
+                                <td style="padding: 0.75rem;">£3,200</td>
+                                <td style="padding: 0.75rem;"><span class="badge success">Active</span></td>
+                                <td style="padding: 0.75rem;">
+                                    <button class="action-btn outline" style="padding: 0.4rem 0.7rem; font-size: 0.85rem;">View Details</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="content-section">
+                    <h2>Upcoming Start Dates</h2>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
+                        <div style="background: #f8fafc; border-radius: 10px; padding: 1.25rem; border-left: 4px solid var(--primary);">
+                            <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                                <div>
+                                    <h3 style="margin-top: 0; margin-bottom: 0.5rem;">Kevin Brown</h3>
+                                    <p style="margin: 0 0 0.5rem 0;">Senior Construction Manager</p>
+                                    <p style="margin: 0; color: var(--text-light); font-size: 0.9rem;"><i class="far fa-calendar-alt"></i> Starting: June 24, 2025</p>
+                                </div>
+                                <div style="font-size: 1.5rem; color: var(--primary);"><i class="fas fa-user-tie"></i></div>
+                            </div>
+                            <div style="margin-top: 1rem;">
+                                <button class="action-btn outline" style="padding: 0.4rem 0.7rem; font-size: 0.85rem; width: 100%;">View Details</button>
+                            </div>
+                        </div>
+                        <div style="background: #f8fafc; border-radius: 10px; padding: 1.25rem; border-left: 4px solid var(--primary);">
+                            <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                                <div>
+                                    <h3 style="margin-top: 0; margin-bottom: 0.5rem;">Olivia Parker</h3>
+                                    <p style="margin: 0 0 0.5rem 0;">HR Coordinator</p>
+                                    <p style="margin: 0; color: var(--text-light); font-size: 0.9rem;"><i class="far fa-calendar-alt"></i> Starting: July 1, 2025</p>
+                                </div>
+                                <div style="font-size: 1.5rem; color: var(--primary);"><i class="fas fa-user-tie"></i></div>
+                            </div>
+                            <div style="margin-top: 1rem;">
+                                <button class="action-btn outline" style="padding: 0.4rem 0.7rem; font-size: 0.85rem; width: 100%;">View Details</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Invoices Tab -->
+            <div id="invoices" class="tab-content">
+                <h1>Invoices</h1>
+                <div class="content-section">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                        <h2 style="margin: 0;">Invoice History</h2>
+                        <div style="display: flex; gap: 1rem;">
+                            <select class="form-control" style="width: 150px;">
+                                <option value="all">All Time</option>
+                                <option value="2025">2025</option>
+                                <option value="2024">2024</option>
+                                <option value="2023">2023</option>
+                            </select>
+                        </div>
+                    </div>
+                    <table style="width: 100%; border-collapse: collapse;">
+                        <thead>
+                            <tr style="border-bottom: 1px solid var(--border);">
+                                <th style="text-align: left; padding: 0.75rem; font-weight: 600;">Invoice #</th>
+                                <th style="text-align: left; padding: 0.75rem; font-weight: 600;">Date</th>
+                                <th style="text-align: left; padding: 0.75rem; font-weight: 600;">Description</th>
+                                <th style="text-align: left; padding: 0.75rem; font-weight: 600;">Amount</th>
+                                <th style="text-align: left; padding: 0.75rem; font-weight: 600;">Status</th>
+                                <th style="text-align: left; padding: 0.75rem; font-weight: 600;">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="border-bottom: 1px solid var(--border);">
+                                <td style="padding: 0.75rem;">INV-2025-0042</td>
+                                <td style="padding: 0.75rem;">June 10, 2025</td>
+                                <td style="padding: 0.75rem;">Placement Fee - Sarah Williams</td>
+                                <td style="padding: 0.75rem;">£4,800.00</td>
+                                <td style="padding: 0.75rem;"><span class="badge warning">Pending</span></td>
+                                <td style="padding: 0.75rem;">
+                                    <button class="action-btn outline" style="padding: 0.4rem 0.7rem; font-size: 0.85rem;">View</button>
+                                    <button class="action-btn outline" style="padding: 0.4rem 0.7rem; font-size: 0.85rem;">Pay Now</button>
+                                </td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid var(--border);">
+                                <td style="padding: 0.75rem;">INV-2025-0036</td>
+                                <td style="padding: 0.75rem;">May 15, 2025</td>
+                                <td style="padding: 0.75rem;">Placement Fee - David Cooper</td>
+                                <td style="padding: 0.75rem;">£5,200.00</td>
+                                <td style="padding: 0.75rem;"><span class="badge success">Paid</span></td>
+                                <td style="padding: 0.75rem;">
+                                    <button class="action-btn outline" style="padding: 0.4rem 0.7rem; font-size: 0.85rem;">View</button>
+                                    <button class="action-btn outline" style="padding: 0.4rem 0.7rem; font-size: 0.85rem;">Download</button>
+                                </td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid var(--border);">
+                                <td style="padding: 0.75rem;">INV-2025-0024</td>
+                                <td style="padding: 0.75rem;">April 8, 2025</td>
+                                <td style="padding: 0.75rem;">Placement Fee - Jessica Moore</td>
+                                <td style="padding: 0.75rem;">£6,100.00</td>
+                                <td style="padding: 0.75rem;"><span class="badge success">Paid</span></td>
+                                <td style="padding: 0.75rem;">
+                                    <button class="action-btn outline" style="padding: 0.4rem 0.7rem; font-size: 0.85rem;">View</button>
+                                    <button class="action-btn outline" style="padding: 0.4rem 0.7rem; font-size: 0.85rem;">Download</button>
+                                </td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid var(--border);">
+                                <td style="padding: 0.75rem;">INV-2025-0018</td>
+                                <td style="padding: 0.75rem;">March 22, 2025</td>
+                                <td style="padding: 0.75rem;">Placement Fee - Mark Wilson</td>
+                                <td style="padding: 0.75rem;">£4,900.00</td>
+                                <td style="padding: 0.75rem;"><span class="badge success">Paid</span></td>
+                                <td style="padding: 0.75rem;">
+                                    <button class="action-btn outline" style="padding: 0.4rem 0.7rem; font-size: 0.85rem;">View</button>
+                                    <button class="action-btn outline" style="padding: 0.4rem 0.7rem; font-size: 0.85rem;">Download</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 0.75rem;">INV-2025-0010</td>
+                                <td style="padding: 0.75rem;">February 15, 2025</td>
+                                <td style="padding: 0.75rem;">Placement Fee - Lisa Taylor</td>
+                                <td style="padding: 0.75rem;">£3,200.00</td>
+                                <td style="padding: 0.75rem;"><span class="badge success">Paid</span></td>
+                                <td style="padding: 0.75rem;">
+                                    <button class="action-btn outline" style="padding: 0.4rem 0.7rem; font-size: 0.85rem;">View</button>
+                                    <button class="action-btn outline" style="padding: 0.4rem 0.7rem; font-size: 0.85rem;">Download</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Messages, Account Settings tabs would be implemented similarly -->
+            <div id="messages" class="tab-content">
+                <h1>Messages</h1>
+                <div class="content-section">
+                    <h2>Inbox</h2>
+                    <div class="message-list">
+                        <div class="content-card message-card">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div>
+                                    <h3 style="margin: 0 0 0.3rem 0; color: var(--primary); font-size: 1.05rem;">Account Manager</h3>
+                                    <p style="margin: 0; color: var(--text-light); font-size: 0.92rem;">Welcome to your client portal! Let us know if you need any help.</p>
+                                </div>
+                                <span style="color: var(--text-light); font-size: 0.85rem;">2 days ago</span>
+                            </div>
+                        </div>
+                        <div class="content-card message-card">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div>
+                                    <h3 style="margin: 0 0 0.3rem 0; color: var(--primary); font-size: 1.05rem;">Support</h3>
+                                    <p style="margin: 0; color: var(--text-light); font-size: 0.92rem;">Your recent job posting has been approved.</p>
+                                </div>
+                                <span style="color: var(--text-light); font-size: 0.85rem;">5 days ago</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="account" class="tab-content">
+                <h1>Account Settings</h1>
+                <div class="content-section">
+                    <h2>Profile Information</h2>
+                    <form style="max-width: 500px;">
+                        <div class="form-group">
+                            <label for="companyName">Company Name</label>
+                            <input type="text" class="form-control" id="companyName" value="London Bridge Construction Ltd">
+                        </div>
+                        <div class="form-group">
+                            <label for="contactName">Contact Name</label>
+                            <input type="text" class="form-control" id="contactName" value="John Doe">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" class="form-control" id="email" value="client@email.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" class="form-control" id="password" value="password123">
+                        </div>
+                        <button type="submit" class="action-btn">Save Changes</button>
+                    </form>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div class="modal-bg" id="jobModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 class="modal-title">Post New Job</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <!-- Job form would go here -->
+            </div>
+            <div class="modal-footer">
+                <button class="action-btn outline">Cancel</button>
+                <button class="action-btn">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Tab switching functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabLinks = document.querySelectorAll('.sidebar-menu a');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            tabLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const tabId = this.getAttribute('data-tab');
+                    
+                    // Update active class on sidebar links
+                    tabLinks.forEach(link => link.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Show the selected tab content
+                    tabContents.forEach(content => {
+                        content.classList.remove('active');
+                    });
+                    document.getElementById(tabId).classList.add('active');
+                });
+            });
+
+            // Set current date in dashboard
+            const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+            const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+            
+            const now = new Date();
+            const dayName = days[now.getDay()];
+            const monthName = months[now.getMonth()];
+            const date = now.getDate();
+            const year = now.getFullYear();
+            
+            document.getElementById('current-date').textContent = `${dayName}, ${monthName} ${date}, ${year}`;
+        });
+    </script>
+</body>
+</html>

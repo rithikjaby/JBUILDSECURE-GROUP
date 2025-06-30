@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jobs - J Buildsecure Group</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #002b5c;
+            --secondary: #01427a;
+            --accent: #ffe600;
+            --bg: #f8fafc;
+            --white: #fff;
+            --shadow: 0 4px 24px rgba(0,0,0,0.07);
+        }
+        body {
+            font-family: 'Inter', 'Montserrat', Arial, sans-serif;
+            background: var(--bg);
+            color: #1a2233;
+            margin: 0;
+            padding: 0;
+            line-height: 1.7;
+        }
+        header {
+            background: var(--primary);
+            color: var(--white);
+            box-shadow: var(--shadow);
+        }
+        .header-container {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1.5rem 2rem;
+        }
+        .logo {
+            font-size: 2rem;
+            font-weight: 700;
+            font-family: 'Montserrat', Arial, sans-serif;
+            letter-spacing: 1px;
+        }
+        .tagline {
+            font-size: 1rem;
+            color: #ffe600; /* Yellow for visibility and brand consistency */
+            margin-top: 0.18rem;
+            display: block;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+        }
+        nav {
+            display: flex;
+            flex-wrap: nowrap;
+            gap: 2.5rem;
+            align-items: center;
+        }
+        nav a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        .login-link {
+            background: var(--accent);
+            color: var(--primary);
+            font-weight: 700;
+            border-radius: 8px;
+            padding: 0.5rem 1.2rem;
+            margin-left: 1.5rem;
+            text-decoration: none;
+            transition: background 0.2s, color 0.2s;
+        }
+        .login-link:hover {
+            background: var(--secondary);
+            color: var(--white);
+        }
+        /* ...existing styles for main, filters, jobs, etc... */
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div style="display: flex; flex-direction: column; align-items: flex-start; min-width: 260px;">
+                <a href="index.html" style="text-decoration: none; color: inherit;">
+                    <span class="logo">J BuildSecure Group</span>
+                    <span class="tagline">Recruitment | Construction | Security</span>
+                </a>
+            </div>
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="about-us.html">About Us</a>
+                <a href="services.html">Services</a>
+                <a href="jobs.html">Jobs</a>
+                <a href="contact-us.html">Contact</a>
+                <a href="register.html">Register</a>
+                <a href="testimonials.html">Testimonials</a>
+                <a href="client-login.html" class="login-link">Login</a>
+            </nav>
+        </div>
+    </header>
+    <main style="max-width: 1200px; margin: 2rem auto; padding: 1rem;">
+        <section style="background: var(--white); border-radius: 16px; box-shadow: var(--shadow); padding: 2rem; margin-bottom: 2rem;">
+            <div style="display: flex; flex-direction: column; gap: 1.2rem;">
+                <div style="display: flex; align-items: center; gap: 1.2rem; flex-wrap: wrap; justify-content: space-between;">
+                    <h1 style="font-size: 2.2rem; color: var(--primary); margin: 0; flex: 1 1 auto;">Find Your Next Opportunity</h1>
+                    <div style="display: flex; align-items: center; gap: 0.5rem; flex: 1 1 auto; max-width: 420px;">
+                        <input type="text" placeholder="Keyword (e.g. Bartender, Nurse)" style="padding: 0.5rem; border-radius: 8px; border: 1px solid #ccc; font-size: 0.95rem; min-width: 120px; flex: 2 1 0;" />
+                        <button type="submit" style="background: var(--primary); color: var(--white); border: none; border-radius: 8px; padding: 0.5rem 1.2rem; font-size: 1rem; font-weight: 600; cursor: pointer; min-width: 90px;">Search</button>
+                    </div>
+                </div>
+                <form style="display: flex; flex-wrap: wrap; gap: 0.7rem; align-items: center; justify-content: flex-start;">
+                    <select style="padding: 0.5rem; border-radius: 8px; border: 1px solid #ccc; font-size: 0.95rem; min-width: 120px; max-width: 140px;" aria-label="Category">
+                        <option value="">Category</option>
+                        <option>Care</option>
+                        <option>Hospitality</option>
+                        <option>Construction</option>
+                        <option>Engineering</option>
+                    </select>
+                    <select style="padding: 0.5rem; border-radius: 8px; border: 1px solid #ccc; font-size: 0.95rem; min-width: 120px; max-width: 140px;" aria-label="Location">
+                        <option value="">Location</option>
+                        <option>London</option>
+                        <option>Manchester</option>
+                        <option>Birmingham</option>
+                        <option>Liverpool</option>
+                    </select>
+                    <select style="padding: 0.5rem; border-radius: 8px; border: 1px solid #ccc; font-size: 0.95rem; min-width: 140px; max-width: 180px;" aria-label="Job Type">
+                        <option value="">Job Type</option>
+                        <option>Full-time (On-site)</option>
+                        <option>Full-time (Remote)</option>
+                        <option>Full-time (Hybrid)</option>
+                        <option>Part-time (On-site)</option>
+                        <option>Part-time (Remote)</option>
+                        <option>Part-time (Hybrid)</option>
+                        <option>Temporary (On-site)</option>
+                        <option>Temporary (Remote)</option>
+                        <option>Temporary (Hybrid)</option>
+                        <option>Contract (On-site)</option>
+                        <option>Contract (Remote)</option>
+                        <option>Contract (Hybrid)</option>
+                    </select>
+                    <div style="display: flex; align-items: center; border: 1px solid #ccc; border-radius: 8px; overflow: hidden; background: #fff;">
+                        <input type="number" min="0" placeholder="Salary" style="border: none; outline: none; padding: 0.5rem 0.7rem; font-size: 0.95rem; width: 80px; background: transparent;" aria-label="Salary Amount" />
+                        <select style="border: none; outline: none; padding: 0.5rem 0.7rem; font-size: 0.95rem; background: #f8fafc;">
+                            <option value="per annum">per annum</option>
+                            <option value="per hour">per hour</option>
+                            <option value="per day">per day</option>
+                        </select>
+                    </div>
+                    <select style="padding: 0.5rem; border-radius: 8px; border: 1px solid #ccc; font-size: 0.95rem; min-width: 120px; max-width: 140px;" aria-label="Date Posted">
+                        <option value="">Date Posted</option>
+                        <option>Last 24 hours</option>
+                        <option>Last 7 days</option>
+                        <option>Last 30 days</option>
+                    </select>
+                    <select style="padding: 0.5rem; border-radius: 8px; border: 1px solid #ccc; font-size: 0.95rem; min-width: 120px; max-width: 140px;" aria-label="Education Level">
+                        <option value="">Education Level</option>
+                        <option>GCSE or equivalent</option>
+                        <option>A-level or equivalent</option>
+                        <option>Degree</option>
+                        <option>Other</option>
+                    </select>
+                </form>
+            </div>
+        </section>
+        <section id="job-listings" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;"></section>
+        <div id="jobs-pagination" style="text-align:center; color:#888; font-size:1rem; margin-top:1rem;"></div>
+        <script>
+        // 40 job data objects
+        const jobs = [
+            // Engineering (10)
+            {title: 'Mechanical Engineer', category: 'Engineering', location: 'London', type: 'Full-time (On-site)', salary: '£45,000', desc: 'Design, develop, and test mechanical systems for major projects.'},
+            {title: 'Electrical Engineer', category: 'Engineering', location: 'Manchester', type: 'Full-time (Hybrid)', salary: '£48,000', desc: 'Work on electrical systems for commercial and residential projects.'},
+            {title: 'Civil Engineer', category: 'Engineering', location: 'Birmingham', type: 'Full-time (On-site)', salary: '£50,000', desc: 'Lead infrastructure projects and ensure compliance with standards.'},
+            {title: 'Project Engineer', category: 'Engineering', location: 'Liverpool', type: 'Contract (Remote)', salary: '£40,000', desc: 'Coordinate engineering projects and support technical teams.'},
+            {title: 'Site Engineer', category: 'Engineering', location: 'London', type: 'Full-time (On-site)', salary: '£42,000', desc: 'Oversee site operations and ensure project milestones are met.'},
+            {title: 'Design Engineer', category: 'Engineering', location: 'Manchester', type: 'Full-time (Remote)', salary: '£46,000', desc: 'Create innovative designs for engineering solutions and products.'},
+            {title: 'Maintenance Engineer', category: 'Engineering', location: 'Birmingham', type: 'Part-time (On-site)', salary: '£22/hr', desc: 'Maintain and repair equipment in industrial settings.'},
+            {title: 'Quality Engineer', category: 'Engineering', location: 'Liverpool', type: 'Full-time (Hybrid)', salary: '£44,000', desc: 'Ensure quality standards are met across all engineering projects.'},
+            {title: 'Process Engineer', category: 'Engineering', location: 'London', type: 'Full-time (On-site)', salary: '£47,000', desc: 'Optimize and improve manufacturing processes for efficiency.'},
+            {title: 'Test Engineer', category: 'Engineering', location: 'Manchester', type: 'Contract (Remote)', salary: '£38,000', desc: 'Test and validate engineering products and systems for reliability.'},
+            // Construction (10)
+            {title: 'Construction Operative', category: 'Construction', location: 'Birmingham', type: 'Temporary (On-site)', salary: '£15/hr', desc: 'Be part of major construction projects and build your career with us. CSCS card required.'},
+            {title: 'Site Manager', category: 'Construction', location: 'London', type: 'Full-time (On-site)', salary: '£55,000', desc: 'Lead construction teams and manage site operations for large projects.'},
+            {title: 'Quantity Surveyor', category: 'Construction', location: 'Manchester', type: 'Full-time (Hybrid)', salary: '£48,000', desc: 'Manage costs and contracts for construction projects.'},
+            {title: 'Health & Safety Officer', category: 'Construction', location: 'Liverpool', type: 'Full-time (On-site)', salary: '£40,000', desc: 'Ensure compliance with health and safety regulations on site.'},
+            {title: 'Architectural Technician', category: 'Construction', location: 'Birmingham', type: 'Full-time (Remote)', salary: '£42,000', desc: 'Support architects in preparing drawings and specifications.'},
+            {title: 'General Labourer', category: 'Construction', location: 'London', type: 'Temporary (On-site)', salary: '£12/hr', desc: 'Assist with various tasks on construction sites. No experience required.'},
+            {title: 'Plumber', category: 'Construction', location: 'Manchester', type: 'Full-time (On-site)', salary: '£36,000', desc: 'Install and repair plumbing systems in new and existing buildings.'},
+            {title: 'Carpenter', category: 'Construction', location: 'Liverpool', type: 'Full-time (On-site)', salary: '£34,000', desc: 'Construct, install, and repair structures and fixtures of wood.'},
+            {title: 'Bricklayer', category: 'Construction', location: 'Birmingham', type: 'Full-time (On-site)', salary: '£32,000', desc: 'Lay bricks, blocks, and other types of building materials.'},
+            {title: 'Painter & Decorator', category: 'Construction', location: 'London', type: 'Full-time (On-site)', salary: '£30,000', desc: 'Paint and decorate interior and exterior surfaces of buildings.'},
+            // Care (10)
+            {title: 'Care Worker', category: 'Care', location: 'London', type: 'Full-time (On-site)', salary: '£22,000', desc: 'Provide compassionate care and support to individuals in need. Experience in care preferred.'},
+            {title: 'Senior Care Assistant', category: 'Care', location: 'Manchester', type: 'Full-time (On-site)', salary: '£25,000', desc: 'Lead a team of care workers and support residents in daily activities.'},
+            {title: 'Support Worker', category: 'Care', location: 'Birmingham', type: 'Part-time (On-site)', salary: '£11/hr', desc: 'Assist clients with daily living and promote independence.'},
+            {title: 'Home Care Assistant', category: 'Care', location: 'Liverpool', type: 'Full-time (On-site)', salary: '£21,000', desc: 'Provide care and support to clients in their own homes.'},
+            {title: 'Night Care Worker', category: 'Care', location: 'London', type: 'Night Shift', salary: '£13/hr', desc: 'Provide overnight care and support for residents in care homes.'},
+            {title: 'Care Home Manager', category: 'Care', location: 'Manchester', type: 'Full-time (On-site)', salary: '£35,000', desc: 'Manage the daily operations of a residential care home.'},
+            {title: 'Domiciliary Care Worker', category: 'Care', location: 'Birmingham', type: 'Part-time (On-site)', salary: '£10/hr', desc: 'Support clients with personal care and household tasks.'},
+            {title: 'Care Coordinator', category: 'Care', location: 'Liverpool', type: 'Full-time (On-site)', salary: '£28,000', desc: 'Coordinate care plans and schedules for clients and staff.'},
+            {title: 'Healthcare Assistant', category: 'Care', location: 'London', type: 'Full-time (On-site)', salary: '£23,000', desc: 'Assist nurses and provide care to patients in hospitals and clinics.'},
+            {title: 'Mental Health Support Worker', category: 'Care', location: 'Manchester', type: 'Full-time (On-site)', salary: '£26,000', desc: 'Support clients with mental health needs in community settings.'},
+            // Hospitality (10)
+            {title: 'Bartender', category: 'Hospitality', location: 'Manchester', type: 'Part-time (On-site)', salary: '£12/hr', desc: 'Work in top hotels and bars, delivering excellent service to guests. Flexible shifts available.'},
+            {title: 'Waiter/Waitress', category: 'Hospitality', location: 'London', type: 'Part-time (On-site)', salary: '£11/hr', desc: 'Serve food and beverages in a busy restaurant environment.'},
+            {title: 'Hotel Receptionist', category: 'Hospitality', location: 'Birmingham', type: 'Full-time (On-site)', salary: '£23,000', desc: 'Welcome guests and manage front desk operations in a hotel.'},
+            {title: 'Housekeeper', category: 'Hospitality', location: 'Liverpool', type: 'Full-time (On-site)', salary: '£20,000', desc: 'Maintain cleanliness and order in guest rooms and public areas.'},
+            {title: 'Chef', category: 'Hospitality', location: 'Manchester', type: 'Full-time (On-site)', salary: '£28,000', desc: 'Prepare and cook meals in a busy kitchen environment.'},
+            {title: 'Sous Chef', category: 'Hospitality', location: 'London', type: 'Full-time (On-site)', salary: '£32,000', desc: 'Assist the head chef in managing kitchen operations and staff.'},
+            {title: 'Barista', category: 'Hospitality', location: 'Birmingham', type: 'Part-time (On-site)', salary: '£10/hr', desc: 'Prepare and serve coffee and other beverages in a café.'},
+            {title: 'Event Staff', category: 'Hospitality', location: 'Liverpool', type: 'Temporary (On-site)', salary: '£9/hr', desc: 'Assist with event setup, guest services, and logistics at various venues.'},
+            {title: 'Kitchen Porter', category: 'Hospitality', location: 'Manchester', type: 'Full-time (On-site)', salary: '£19,000', desc: 'Support kitchen staff by maintaining cleanliness and order.'},
+            {title: 'Front of House Manager', category: 'Hospitality', location: 'London', type: 'Full-time (On-site)', salary: '£35,000', desc: 'Oversee front-of-house operations in a busy hospitality venue.'},
+        ];
+        const jobsPerPage = 12;
+        let currentPage = 1;
+        function renderJobs(page) {
+            const start = (page - 1) * jobsPerPage;
+            const end = start + jobsPerPage;
+            const jobsToShow = jobs.slice(start, end);
+            const jobGrid = document.getElementById('job-listings');
+            jobGrid.innerHTML = jobsToShow.map(job => `
+                <div style="background: var(--white); border-radius: 16px; box-shadow: 0 4px 24px rgba(0,0,0,0.07); padding: 2rem; display: flex; flex-direction: column; justify-content: space-between; transition: box-shadow 0.2s;">
+                    <h2 style="color: #002b5c; font-size: 1.4rem; margin-bottom: 0.5rem;">${job.title}</h2>
+                    <p style="color: #01427a; font-weight: 600; margin-bottom: 0.5rem;">${job.location} | ${job.type} | ${job.salary}</p>
+                    <p style="margin-bottom: 1rem;">${job.desc}</p>
+                    <button style="background: #ffe600; color: #002b5c; border: none; border-radius: 8px; padding: 0.7rem 1.5rem; font-size: 1rem; font-weight: 600; cursor: pointer; align-self: flex-start;">Apply Now</button>
+                </div>
+            `).join('');
+        }
+        function renderPagination(page) {
+            const totalPages = Math.ceil(jobs.length / jobsPerPage);
+            let html = '';
+            html += '<button onclick="changePage(' + (page-1) + ')"' + (page===1?' disabled style="opacity:0.5;"':'') + ' aria-label="Previous Page">&#8592;</button>';
+            for(let i=1;i<=totalPages;i++) {
+                if(i===page) {
+                    html += '<button style="background: #ffe600; color: #002b5c; font-weight:700;" disabled>' + i + '</button>';
+                } else if(i<=2 || i>totalPages-2 || Math.abs(i-page)<=1) {
+                    html += '<button onclick="changePage(' + i + ')">' + i + '</button>';
+                } else if(i===3 && page>4) {
+                    html += '<span>...</span>';
+                } else if(i===totalPages-2 && page<totalPages-3) {
+                    html += '<span>...</span>';
+                }
+            }
+            html += '<button onclick="changePage(' + (page+1) + '"'+ (page===totalPages?' disabled style="opacity:0.5;"':'') + ' aria-label="Next Page">&#8594;</button>';
+            document.getElementById('jobs-pagination').innerHTML = '<div style="display:flex;justify-content:center;align-items:center;gap:0.5rem;">' + html + '</div><div style="color:#888;font-size:1rem;margin-top:0.5rem;">Showing ' + Math.min(page*jobsPerPage,jobs.length) + ' of ' + jobs.length + ' jobs.</div>';
+        }
+        function changePage(page) {
+            const totalPages = Math.ceil(jobs.length / jobsPerPage);
+            if(page<1||page>totalPages) return;
+            currentPage = page;
+            renderJobs(page);
+            renderPagination(page);
+        }
+        // Initial render
+        renderJobs(currentPage);
+        renderPagination(currentPage);
+        </script>
+    </main>
+    <!-- ...existing code for Register CTA, etc. if needed... -->
+</body>
+</html>

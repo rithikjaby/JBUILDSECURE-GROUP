@@ -1,0 +1,1734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Staff Portal - J BuildSecure Group</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #002b5c;
+            --secondary: #01427a;
+            --accent: #ffe600;
+            --bg: #f8fafc;
+            --white: #fff;
+            --shadow: 0 4px 24px rgba(0,0,0,0.07);
+            --border: #e2e8f0;
+            --text: #1a2233;
+            --text-light: #64748b;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+        }
+        body {
+            font-family: 'Inter', 'Montserrat', Arial, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 0;
+            line-height: 1.7;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        header {
+            background: var(--primary);
+            color: var(--white);
+            box-shadow: var(--shadow);
+        }
+        .header-top {
+            background: #00305e;
+            color: var(--white);
+            text-align: center;
+            padding: 1.2rem 1rem 0.8rem;
+        }
+        .logo {
+            font-size: 2.5rem;
+            font-weight: 700;
+            font-family: 'Montserrat', Arial, sans-serif;
+            letter-spacing: 1px;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        .tagline {
+            font-size: 1.2rem;
+            display: block;
+            margin-bottom: 1rem;
+            color: #fff;
+        }
+        .nav-container {
+            background: #00407d;
+            box-shadow: var(--shadow);
+        }
+        .main-nav {
+            display: flex;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0.5rem 1rem;
+        }
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            align-items: center;
+        }
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 600;
+            white-space: nowrap;
+            padding: 0.5rem 0;
+        }
+        .nav-links a:hover {
+            color: #ffe600;
+        }
+        .nav-links a.active {
+            color: #ffe600;
+        }
+        .user-menu {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: var(--white);
+        }
+        .user-menu .user-name {
+            font-weight: 600;
+        }
+        .user-menu .logout-btn {
+            background: var(--accent);
+            color: var(--primary);
+            border: none;
+            border-radius: 8px;
+            padding: 0.5rem 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: background 0.2s, color 0.2s;
+        }
+        .user-menu .logout-btn:hover {
+            background: var(--white);
+        }
+        .portal-container {
+            display: flex;
+            flex: 1;
+            width: 100%;
+            margin: 2rem 0 0 0;
+            gap: 2rem;
+            padding: 0 2rem 0 0;
+            justify-content: flex-start;
+            max-width: none;
+        }
+        .sidebar {
+            width: 250px;
+            background: var(--white);
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            padding: 1.5rem;
+            flex-shrink: 0;
+            height: fit-content;
+        }
+        .sidebar-menu {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .sidebar-menu li {
+            margin-bottom: 0.5rem;
+        }
+        .sidebar-menu a {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1rem;
+            color: var(--text);
+            text-decoration: none;
+            border-radius: 8px;
+            transition: background 0.2s, color 0.2s;
+        }
+        .sidebar-menu a:hover {
+            background: #f1f5f9;
+        }
+        .sidebar-menu a.active {
+            background: var(--primary);
+            color: var(--white);
+        }
+        .sidebar-menu i {
+            width: 20px;
+            text-align: center;
+        }
+        .content {
+            flex: 1;
+            background: var(--white);
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            padding: 2rem;
+            overflow: auto;
+        }
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+        .dashboard-header h1 {
+            color: var(--primary);
+            margin: 0;
+            font-size: 1.8rem;
+        }
+        .date-display {
+            color: var(--text-light);
+            font-size: 1.1rem;
+        }
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .stat-card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+        }
+        .stat-card .stat-title {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            margin-bottom: 0.5rem;
+        }
+        .stat-card .stat-value {
+            color: var(--primary);
+            font-size: 1.7rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        .stat-card .stat-description {
+            color: var(--text);
+            font-size: 0.9rem;
+        }
+        .content-section {
+            margin-bottom: 2rem;
+        }
+        .content-section h2 {
+            color: var(--primary);
+            margin-bottom: 1.25rem;
+            font-size: 1.4rem;
+        }
+        .content-card {
+            background: #f8fafc;
+            border-radius: 10px;
+            padding: 1.25rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--primary);
+        }
+        .content-card h3 {
+            color: var(--primary);
+            margin-top: 0;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+        .content-card p {
+            margin: 0;
+            font-size: 0.95rem;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .action-btn {
+            background: var(--primary);
+            color: var(--white);
+            border: none;
+            border-radius: 8px;
+            padding: 0.6rem 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 0.95rem;
+            transition: background 0.2s;
+        }
+        .action-btn:hover {
+            background: var(--secondary);
+        }
+        .action-btn.outline {
+            background: transparent;
+            color: var(--primary);
+            border: 1px solid var(--primary);
+        }
+        .action-btn.outline:hover {
+            background: var(--primary);
+            color: var(--white);
+        }
+        .action-btn.success {
+            background: var(--success);
+        }
+        .action-btn.warning {
+            background: var(--warning);
+        }
+        .action-btn.danger {
+            background: var(--danger);
+        }
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--text);
+        }
+        .form-control {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+        }
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(0, 43, 92, 0.1);
+        }
+        .table-container {
+            width: 100%;
+            overflow-x: auto;
+            margin-bottom: 2rem;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 0.75rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+        th {
+            background: #f8fafc;
+            font-weight: 600;
+            color: var(--primary);
+        }
+        tr:hover {
+            background: #f8fafc;
+        }
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        .badge-primary {
+            background: rgba(0, 43, 92, 0.1);
+            color: var(--primary);
+        }
+        .badge-success {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--success);
+        }
+        .badge-warning {
+            background: rgba(245, 158, 11, 0.1);
+            color: var(--warning);
+        }
+        .badge-danger {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--danger);
+        }
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        .candidate-card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .candidate-card-header {
+            background: var(--primary);
+            color: var(--white);
+            padding: 1rem;
+            position: relative;
+        }
+        .candidate-card-body {
+            padding: 1rem;
+        }
+        .candidate-card-actions {
+            display: flex;
+            justify-content: space-between;
+            padding: 1rem;
+            background: #f8fafc;
+            border-top: 1px solid var(--border);
+        }
+        .job-form {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 2rem;
+        }
+        .search-form {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        .search-form .form-control {
+            flex: 1;
+        }
+        .alert {
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            background: #f8fafc;
+            border-left: 4px solid var(--primary);
+        }
+        .alert-success {
+            background: rgba(16, 185, 129, 0.1);
+            border-left-color: var(--success);
+        }
+        .alert-warning {
+            background: rgba(245, 158, 11, 0.1);
+            border-left-color: var(--warning);
+        }
+        .alert-danger {
+            background: rgba(239, 68, 68, 0.1);
+            border-left-color: var(--danger);
+        }
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 2rem;
+        }
+        .tabs .tab {
+            padding: 0.75rem 1.5rem;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            font-weight: 600;
+            color: var(--text-light);
+        }
+        .tabs .tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+        }
+        .sub-content {
+            display: none;
+        }
+        .sub-content.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-top">
+            <span class="logo">J BuildSecure Group</span>
+            <span class="tagline">Recruitment | Construction | Security</span>
+            <div class="user-menu" style="position: absolute; top: 1.5rem; right: 2.5rem; display: flex; align-items: center; gap: 1rem;">
+                <span class="user-name">Sarah Johnson <span style="font-size: 0.8rem; opacity: 0.8;">(HR Manager)</span></span>
+                <a href="employee-login.html" class="logout-btn" style="background: var(--accent); color: var(--primary); border-radius: 8px; padding: 0.5rem 1rem; font-weight: 600; text-decoration: none; font-size: 0.95rem;">Logout</a>
+            </div>
+        </div>
+        <!-- Navigation removed for staff portal: no nav-container/main-nav -->
+    </header>
+
+    <div class="portal-container">
+        <aside class="sidebar">
+            <ul class="sidebar-menu">
+                <li><a href="#dashboard" class="active" data-tab="dashboard"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                <li><a href="#job-management" data-tab="job-management"><i class="fas fa-briefcase"></i> Job Management</a></li>
+                <li><a href="#candidates" data-tab="candidates"><i class="fas fa-users"></i> Candidates</a></li>
+                <li><a href="#placements" data-tab="placements"><i class="fas fa-handshake"></i> Placements</a></li>
+                <li><a href="#clients" data-tab="clients"><i class="fas fa-building"></i> Clients</a></li>
+                <li><a href="#hr-admin" data-tab="hr-admin"><i class="fas fa-user-tie"></i> HR Admin</a></li>
+                <li><a href="#reports" data-tab="reports"><i class="fas fa-chart-bar"></i> Reports</a></li>
+                <li><a href="#communications" data-tab="communications"><i class="fas fa-envelope"></i> Communications</a></li>
+                <li><a href="#calendar" data-tab="calendar"><i class="fas fa-calendar-alt"></i> Calendar</a></li>
+                <li><a href="#settings" data-tab="settings"><i class="fas fa-cog"></i> Settings</a></li>
+            </ul>
+        </aside>
+
+        <main class="content">
+            <!-- Dashboard Tab -->
+            <div id="dashboard" class="tab-content active">
+                <h1>Staff Dashboard</h1>
+                <div class="dashboard-grid">
+                    <div class="stat-card">
+                        <div class="stat-title">Active Jobs</div>
+                        <div class="stat-value">42</div>
+                        <div class="stat-description">8 new this week</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-title">New Candidates</div>
+                        <div class="stat-value">18</div>
+                        <div class="stat-description">Last 7 days</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-title">Pending Interviews</div>
+                        <div class="stat-value">12</div>
+                        <div class="stat-description">3 today</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-title">Placements</div>
+                        <div class="stat-value">7</div>
+                        <div class="stat-description">This month</div>
+                    </div>
+                </div>
+                <div class="table-container">
+                    <table>
+                        <thead><tr><th>Recent Activity</th><th>Details</th><th>Time</th></tr></thead>
+                        <tbody>
+                            <tr><td>Job Posted</td><td>Senior Construction Manager</td><td>1 hour ago</td></tr>
+                            <tr><td>Candidate Application</td><td>John Smith for Security Officer</td><td>3 hours ago</td></tr>
+                            <tr><td>Interview Scheduled</td><td>Emma Williams for Project Coordinator</td><td>Tomorrow</td></tr>
+                            <tr><td>Placement Confirmed</td><td>Michael Brown at BuildRight Ltd</td><td>Today</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="dashboard-actions" style="margin-top:2rem; display:flex; gap:1.5rem;">
+                    <a href="#job-management" class="action-btn">Go to Job Management</a>
+                    <a href="#candidates" class="action-btn">Review Candidates</a>
+                    <a href="#placements" class="action-btn">View Placements</a>
+                </div>
+            </div>
+
+            <!-- Job Management Tab -->
+            <div id="job-management" class="tab-content">
+                <h1>Job Management</h1>
+                
+                <div class="tabs">
+                    <div class="tab active" data-subtab="job-listings">Active Listings</div>
+                    <div class="tab" data-subtab="create-job">Create New Job</div>
+                    <div class="tab" data-subtab="job-drafts">Drafts</div>
+                    <div class="tab" data-subtab="job-archive">Archive</div>
+                </div>
+                
+                <!-- Job Listings Sub-Tab -->
+                <div id="job-listings" class="sub-content active">
+                    <div class="search-form">
+                        <input type="text" class="form-control" placeholder="Search jobs...">
+                        <select class="form-control" style="max-width: 200px;">
+                            <option>All Categories</option>
+                            <option>Construction</option>
+                            <option>Security</option>
+                            <option>Office</option>
+                            <option>Management</option>
+                        </select>
+                        <button class="action-btn">Search</button>
+                    </div>
+                    
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Job Title</th>
+                                    <th>Category</th>
+                                    <th>Location</th>
+                                    <th>Posted Date</th>
+                                    <th>Applications</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Senior Construction Manager</td>
+                                    <td>Construction</td>
+                                    <td>London</td>
+                                    <td>Jun 14, 2025</td>
+                                    <td>3</td>
+                                    <td><span class="badge badge-success">Active</span></td>
+                                    <td>
+                                        <button class="action-btn outline" style="padding: 0.3rem 0.5rem; font-size: 0.8rem;">Edit</button>
+                                        <button class="action-btn outline" style="padding: 0.3rem 0.5rem; font-size: 0.8rem;">View</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Security Officer</td>
+                                    <td>Security</td>
+                                    <td>Manchester</td>
+                                    <td>Jun 12, 2025</td>
+                                    <td>8</td>
+                                    <td><span class="badge badge-success">Active</span></td>
+                                    <td>
+                                        <button class="action-btn outline" style="padding: 0.3rem 0.5rem; font-size: 0.8rem;">Edit</button>
+                                        <button class="action-btn outline" style="padding: 0.3rem 0.5rem; font-size: 0.8rem;">View</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Project Coordinator</td>
+                                    <td>Office</td>
+                                    <td>Birmingham</td>
+                                    <td>Jun 10, 2025</td>
+                                    <td>5</td>
+                                    <td><span class="badge badge-success">Active</span></td>
+                                    <td>
+                                        <button class="action-btn outline" style="padding: 0.3rem 0.5rem; font-size: 0.8rem;">Edit</button>
+                                        <button class="action-btn outline" style="padding: 0.3rem 0.5rem; font-size: 0.8rem;">View</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Site Manager</td>
+                                    <td>Construction</td>
+                                    <td>Leeds</td>
+                                    <td>Jun 8, 2025</td>
+                                    <td>6</td>
+                                    <td><span class="badge badge-warning">Interviewing</span></td>
+                                    <td>
+                                        <button class="action-btn outline" style="padding: 0.3rem 0.5rem; font-size: 0.8rem;">Edit</button>
+                                        <button class="action-btn outline" style="padding: 0.3rem 0.5rem; font-size: 0.8rem;">View</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Recruitment Specialist</td>
+                                    <td>Office</td>
+                                    <td>London</td>
+                                    <td>Jun 5, 2025</td>
+                                    <td>12</td>
+                                    <td><span class="badge badge-primary">Shortlisting</span></td>
+                                    <td>
+                                        <button class="action-btn outline" style="padding: 0.3rem 0.5rem; font-size: 0.8rem;">Edit</button>
+                                        <button class="action-btn outline" style="padding: 0.3rem 0.5rem; font-size: 0.8rem;">View</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <!-- Create Job Sub-Tab -->
+                <div id="create-job" class="sub-content">
+                    <div class="job-form">
+                        <div class="form-group">
+                            <label for="job-title">Job Title</label>
+                            <input type="text" id="job-title" class="form-control" placeholder="e.g. Senior Construction Manager">
+                        </div>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+                            <div class="form-group">
+                                <label for="job-category">Category</label>
+                                <select id="job-category" class="form-control">
+                                    <option>Select Category</option>
+                                    <option>Construction</option>
+                                    <option>Security</option>
+                                    <option>Office</option>
+                                    <option>Management</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="job-type">Employment Type</label>
+                                <select id="job-type" class="form-control">
+                                    <option>Select Type</option>
+                                    <option>Full-time</option>
+                                    <option>Part-time</option>
+                                    <option>Contract</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="job-location">Location</label>
+                            <input type="text" id="job-location" class="form-control" placeholder="e.g. London">
+                        </div>
+                        <div class="form-group">
+                            <label for="job-description">Description</label>
+                            <textarea id="job-description" class="form-control" rows="4" placeholder="Describe the job role, requirements, etc."></textarea>
+                        </div>
+                        <button class="action-btn">Post Job</button>
+                    </div>
+                </div>
+                <!-- Drafts Sub-Tab (Dashboard) -->
+                <div id="job-drafts" class="sub-content">
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Job Title</th>
+                                    <th>Category</th>
+                                    <th>Location</th>
+                                    <th>Last Edited</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Assistant Site Manager</td>
+                                    <td>Construction</td>
+                                    <td>Leeds</td>
+                                    <td>Jun 13, 2025</td>
+                                    <td><span class="badge badge-warning">Draft</span></td>
+                                    <td>
+                                        <button class="action-btn outline">Edit</button>
+                                        <button class="action-btn outline">Delete</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Office Admin</td>
+                                    <td>Office</td>
+                                    <td>Manchester</td>
+                                    <td>Jun 11, 2025</td>
+                                    <td><span class="badge badge-warning">Draft</span></td>
+                                    <td>
+                                        <button class="action-btn outline">Edit</button>
+                                        <button class="action-btn outline">Delete</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- Archive Sub-Tab (Dashboard) -->
+                <div id="job-archive" class="sub-content">
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Job Title</th>
+                                    <th>Category</th>
+                                    <th>Location</th>
+                                    <th>Closed Date</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Logistics Coordinator</td>
+                                    <td>Management</td>
+                                    <td>London</td>
+                                    <td>May 30, 2025</td>
+                                    <td><span class="badge badge-danger">Closed</span></td>
+                                    <td>
+                                        <button class="action-btn outline">View</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Security Supervisor</td>
+                                    <td>Security</td>
+                                    <td>Birmingham</td>
+                                    <td>May 25, 2025</td>
+                                    <td><span class="badge badge-danger">Closed</span></td>
+                                    <td>
+                                        <button class="action-btn outline">View</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Job Management Tab -->
+            <div id="job-management" class="tab-content">
+                <h1>Job Management</h1>
+                
+                <div class="tabs">
+                    <div class="tab active" data-subtab="job-listings">Active Listings</div>
+                    <div class="tab" data-subtab="create-job">Create New Job</div>
+                    <div class="tab" data-subtab="job-drafts">Drafts</div>
+                    <div class="tab" data-subtab="job-archive">Archive</div>
+                </div>
+                
+                <!-- Job Listings Sub-Tab -->
+                <div id="job-listings" class="sub-content active">
+                    <div class="search-form">
+                        <input type="text" class="form-control" placeholder="Search jobs...">
+                        <select class="form-control" style="max-width: 200px;">
+                            <option>All Categories</option>
+                            <option>Construction</option>
+                            <option>Security</option>
+                            <option>Office</option>
+                            <option>Management</option>
+                        </select>
+                        <button class="action-btn">Search</button>
+                    </div>
+                    
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Job Title</th>
+                                    <th>Category</th>
+                                    <th>Location</th>
+                                    <th>Posted Date</th>
+                                    <th>Applications</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Senior Construction Manager</td>
+                                    <td>Construction</td>
+                                    <td>London</td>
+                                    <td>Jun 14, 2025</td>
+                                    <td>3</td>
+                                    <td><span class="badge badge-success">Active</span></td>
+                                    <td>
+                                        <button class="action-btn outline" style="padding: 0.3rem 0.5rem; font-size: 0.8rem;">Edit</button>
+                                        <button class="action-btn outline" style="padding: 0.3rem 0.5rem; font-size: 0.8rem;">View</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Security Officer</td>
+                                    <td>Security</td>
+                                    <td>Manchester</td>
+                                    <td>Jun 12, 2025</td>
+                                    <td>8</td>
+                                    <td><span class="badge badge-success">Active</span></td>
+                                    <td>
+                                        <button class="action-btn outline" style="padding: 0.3rem 0.5rem; font-size: 0.8rem;">Edit</button>
+                                        <button class="action-btn outline" style="padding: 0.3rem 0.5rem; font-size: 0.8rem;">View</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Project Coordinator</td>
+                                    <td>Office</td>
+                                    <td>Birmingham</td>
+                                    <td>Jun 10, 2025</td>
+                                    <td>5</td>
+                                    <td><span class="badge badge-success">Active</span></td>
+                                    <td>
+                                        <button class="action-btn outline" style="padding: 0.3rem 0.5rem; font-size: 0.8rem;">Edit</button>
+                                        <button class="action-btn outline" style="padding: 0.3rem 0.5rem; font-size: 0.8rem;">View</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Site Manager</td>
+                                    <td>Construction</td>
+                                    <td>Leeds</td>
+                                    <td>Jun 8, 2025</td>
+                                    <td>6</td>
+                                    <td><span class="badge badge-warning">Interviewing</span></td>
+                                    <td>
+                                        <button class="action-btn outline" style="padding: 0.3rem 0.5rem; font-size: 0.8rem;">Edit</button>
+                                        <button class="action-btn outline" style="padding: 0.3rem 0.5rem; font-size: 0.8rem;">View</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Recruitment Specialist</td>
+                                    <td>Office</td>
+                                    <td>London</td>
+                                    <td>Jun 5, 2025</td>
+                                    <td>12</td>
+                                    <td><span class="badge badge-primary">Shortlisting</span></td>
+                                    <td>
+                                        <button class="action-btn outline" style="padding: 0.3rem 0.5rem; font-size: 0.8rem;">Edit</button>
+                                        <button class="action-btn outline" style="padding: 0.3rem 0.5rem; font-size: 0.8rem;">View</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <!-- Create Job Sub-Tab -->
+                <div id="create-job" class="sub-content">
+                    <div class="job-form">
+                        <div class="form-group">
+                            <label for="job-title">Job Title</label>
+                            <input type="text" id="job-title" class="form-control" placeholder="e.g. Senior Construction Manager">
+                        </div>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+                            <div class="form-group">
+                                <label for="job-category">Category</label>
+                                <select id="job-category" class="form-control">
+                                    <option>Select Category</option>
+                                    <option>Construction</option>
+                                    <option>Security</option>
+                                    <option>Office</option>
+                                    <option>Management</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="job-type">Employment Type</label>
+                                <select id="job-type" class="form-control">
+                                    <option>Select Type</option>
+                                    <option>Full-time</option>
+                                    <option>Part-time</option>
+                                    <option>Contract</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="job-location">Location</label>
+                            <input type="text" id="job-location" class="form-control" placeholder="e.g. London">
+                        </div>
+                        <div class="form-group">
+                            <label for="job-description">Description</label>
+                            <textarea id="job-description" class="form-control" rows="4" placeholder="Describe the job role, requirements, etc."></textarea>
+                        </div>
+                        <button class="action-btn">Post Job</button>
+                    </div>
+                </div>
+                <!-- Drafts Sub-Tab (Dashboard) -->
+                <div id="job-drafts" class="sub-content">
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Job Title</th>
+                                    <th>Category</th>
+                                    <th>Location</th>
+                                    <th>Last Edited</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Assistant Site Manager</td>
+                                    <td>Construction</td>
+                                    <td>Leeds</td>
+                                    <td>Jun 13, 2025</td>
+                                    <td><span class="badge badge-warning">Draft</span></td>
+                                    <td>
+                                        <button class="action-btn outline">Edit</button>
+                                        <button class="action-btn outline">Delete</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Office Admin</td>
+                                    <td>Office</td>
+                                    <td>Manchester</td>
+                                    <td>Jun 11, 2025</td>
+                                    <td><span class="badge badge-warning">Draft</span></td>
+                                    <td>
+                                        <button class="action-btn outline">Edit</button>
+                                        <button class="action-btn outline">Delete</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- Archive Sub-Tab (Dashboard) -->
+                <div id="job-archive" class="sub-content">
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Job Title</th>
+                                    <th>Category</th>
+                                    <th>Location</th>
+                                    <th>Closed Date</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Logistics Coordinator</td>
+                                    <td>Management</td>
+                                    <td>London</td>
+                                    <td>May 30, 2025</td>
+                                    <td><span class="badge badge-danger">Closed</span></td>
+                                    <td>
+                                        <button class="action-btn outline">View</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Security Supervisor</td>
+                                    <td>Security</td>
+                                    <td>Birmingham</td>
+                                    <td>May 25, 2025</td>
+                                    <td><span class="badge badge-danger">Closed</span></td>
+                                    <td>
+                                        <button class="action-btn outline">View</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Candidates Tab -->
+            <div id="candidates" class="tab-content">
+                <h1>Candidate Management</h1>
+                
+                <div class="tabs">
+                    <div class="tab active" data-subtab="candidate-search">Search Candidates</div>
+                    <div class="tab" data-subtab="new-applications">New Applications</div>
+                    <div class="tab" data-subtab="candidate-shortlist">Shortlisted</div>
+                    <div class="tab" data-subtab="interviews">Interviews</div>
+                </div>
+                
+                <!-- Candidate Search Sub-Tab -->
+                <div id="candidate-search" class="sub-content active">
+                    <div class="search-form">
+                        <input type="text" class="form-control" placeholder="Search by name, skills, or experience...">
+                        <select class="form-control" style="max-width: 200px;">
+                            <option>All Categories</option>
+                            <option>Construction</option>
+                            <option>Security</option>
+                            <option>Office</option>
+                            <option>Management</option>
+                        </select>
+                        <button class="action-btn">Search</button>
+                    </div>
+                    
+                    <div class="card-grid">
+                        <div class="candidate-card">
+                            <div class="candidate-card-header">
+                                <h3 style="margin: 0;">John Smith</h3>
+                                <p style="margin: 0; opacity: 0.8;">Security Officer</p>
+                            </div>
+                            <div class="candidate-card-body">
+                                <p><strong>Experience:</strong> 5+ years in security</p>
+                                <p><strong>Location:</strong> Manchester</p>
+                                <p><strong>Skills:</strong> CCTV monitoring, conflict resolution, report writing</p>
+                                <p><strong>Availability:</strong> Immediate</p>
+                            </div>
+                            <div class="candidate-card-actions">
+                                <button class="action-btn outline">View CV</button>
+                                <button class="action-btn">Contact</button>
+                            </div>
+                        </div>
+                        
+                        <div class="candidate-card">
+                            <div class="candidate-card-header">
+                                <h3 style="margin: 0;">Emma Williams</h3>
+                                <p style="margin: 0; opacity: 0.8;">Project Coordinator</p>
+                            </div>
+                            <div class="candidate-card-body">
+                                <p><strong>Experience:</strong> 3 years in construction admin</p>
+                                <p><strong>Location:</strong> Birmingham</p>
+                                <p><strong>Skills:</strong> Project scheduling, document control, stakeholder communication</p>
+                                <p><strong>Availability:</strong> 2 weeks notice</p>
+                            </div>
+                            <div class="candidate-card-actions">
+                                <button class="action-btn outline">View CV</button>
+                                <button class="action-btn">Contact</button>
+                            </div>
+                        </div>
+                        
+                        <div class="candidate-card">
+                            <div class="candidate-card-header">
+                                <h3 style="margin: 0;">Michael Brown</h3>
+                                <p style="margin: 0; opacity: 0.8;">Site Manager</p>
+                            </div>
+                            <div class="candidate-card-body">
+                                <p><strong>Experience:</strong> 8 years in construction management</p>
+                                <p><strong>Location:</strong> Leeds</p>
+                                <p><strong>Skills:</strong> Team leadership, health & safety, project delivery</p>
+                                <p><strong>Availability:</strong> 1 month notice</p>
+                            </div>
+                            <div class="candidate-card-actions">
+                                <button class="action-btn outline">View CV</button>
+                                <button class="action-btn">Contact</button>
+                            </div>
+                        </div>
+                        
+                        <div class="candidate-card">
+                            <div class="candidate-card-header">
+                                <h3 style="margin: 0;">Sarah Parker</h3>
+                                <p style="margin: 0; opacity: 0.8;">Recruitment Specialist</p>
+                            </div>
+                            <div class="candidate-card-body">
+                                <p><strong>Experience:</strong> 4 years in recruitment</p>
+                                <p><strong>Location:</strong> London</p>
+                                <p><strong>Skills:</strong> Candidate sourcing, interviewing, ATS management</p>
+                                <p><strong>Availability:</strong> Immediate</p>
+                            </div>
+                            <div class="candidate-card-actions">
+                                <button class="action-btn outline">View CV</button>
+                                <button class="action-btn">Contact</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- New Applications Sub-Tab -->
+                <div id="new-applications" class="sub-content">
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Applied For</th>
+                                    <th>Date Applied</th>
+                                    <th>Location</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>David Wilson</td>
+                                    <td>Senior Construction Manager</td>
+                                    <td>Jun 15, 2025</td>
+                                    <td>London</td>
+                                    <td><span class="badge badge-primary">New</span></td>
+                                    <td>
+                                        <button class="action-btn outline" style="padding: 0.3rem 0.5rem; font-size: 0.8rem;">View CV</button>
+                                        <button class="action-btn" style="padding: 0.3rem 0.5rem; font-size: 0.8rem;">Shortlist</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Laura Thompson</td>
+                                    <td>Security Officer</td>
+                                    <td>Jun 14, 2025</td>
+                                    <td>Manchester</td>
+                                    <td><span class="badge badge-primary">New</span></td>
+                                    <td>
+                                        <button class="action-btn outline" style="padding: 0.3rem 0.5rem; font-size: 0.8rem;">View CV</button>
+                                        <button class="action-btn" style="padding: 0.3rem 0.5rem; font-size: 0.8rem;">Shortlist</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>James Harrison</td>
+                                    <td>Project Coordinator</td>
+                                    <td>Jun 14, 2025</td>
+                                    <td>Birmingham</td>
+                                    <td><span class="badge badge-primary">New</span></td>
+                                    <td>
+                                        <button class="action-btn outline" style="padding: 0.3rem 0.5rem; font-size: 0.8rem;">View CV</button>
+                                        <button class="action-btn" style="padding: 0.3rem 0.5rem; font-size: 0.8rem;">Shortlist</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <!-- Candidate Shortlist Sub-Tab -->
+                <div id="candidate-shortlist" class="sub-content">
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Shortlisted For</th>
+                                    <th>Date Shortlisted</th>
+                                    <th>Experience</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Robert Davis</td>
+                                    <td>Site Manager</td>
+                                    <td>Jun 12, 2025</td>
+                                    <td>7 years</td>
+                                    <td>
+                                        <button class="action-btn outline" style="padding: 0.3rem 0.5rem; font-size: 0.8rem;">View CV</button>
+                                        <button class="action-btn" style="padding: 0.3rem 0.5rem; font-size: 0.8rem;">Schedule Interview</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Amanda Harris</td>
+                                    <td>Recruitment Specialist</td>
+                                    <td>Jun 10, 2025</td>
+                                    <td>5 years</td>
+                                    <td>
+                                        <button class="action-btn outline" style="padding: 0.3rem 0.5rem; font-size: 0.8rem;">View CV</button>
+                                        <button class="action-btn" style="padding: 0.3rem 0.5rem; font-size: 0.8rem;">Schedule Interview</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <!-- Interviews Sub-Tab -->
+                <div id="interviews" class="sub-content">
+                    <div class="alert alert-warning">
+                        <strong>Today's Interviews:</strong> You have 3 interviews scheduled for today.
+                    </div>
+                    
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Candidate</th>
+                                    <th>Position</th>
+                                    <th>Date & Time</th>
+                                    <th>Interview Type</th>
+                                    <th>Interviewer</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Emma Williams</td>
+                                    <td>Project Coordinator</td>
+                                    <td>Jun 16, 2025 - 2:00 PM</td>
+                                    <td>In-person</td>
+                                    <td>Sarah Johnson</td>
+                                    <td>
+                                        <button class="action-btn outline" style="padding: 0.3rem 0.5rem; font-size: 0.8rem;">View Details</button>
+                                        <button class="action-btn" style="padding: 0.3rem 0.5rem; font-size: 0.8rem;">Add Feedback</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>John Smith</td>
+                                    <td>Security Officer</td>
+                                    <td>Jun 15, 2025 - 11:00 AM</td>
+                                    <td>Video</td>
+                                    <td>Mark Reynolds</td>
+                                    <td>
+                                        <button class="action-btn outline" style="padding: 0.3rem 0.5rem; font-size: 0.8rem;">View Details</button>
+                                        <button class="action-btn" style="padding: 0.3rem 0.5rem; font-size: 0.8rem;">Add Feedback</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Michael Brown</td>
+                                    <td>Site Manager</td>
+                                    <td>Jun 15, 2025 - 3:30 PM</td>
+                                    <td>In-person</td>
+                                    <td>Sarah Johnson</td>
+                                    <td>
+                                        <button class="action-btn outline" style="padding: 0.3rem 0.5rem; font-size: 0.8rem;">View Details</button>
+                                        <button class="action-btn" style="padding: 0.3rem 0.5rem; font-size: 0.8rem;">Add Feedback</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Laura Thompson</td>
+                                    <td>Security Officer</td>
+                                    <td>Jun 17, 2025 - 10:00 AM</td>
+                                    <td>Phone</td>
+                                    <td>Mark Reynolds</td>
+                                    <td>
+                                        <button class="action-btn outline" style="padding: 0.3rem 0.5rem; font-size: 0.8rem;">View Details</button>
+                                        <button class="action-btn outline" style="padding: 0.3rem 0.5rem; font-size: 0.8rem;">Reschedule</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Placements Tab -->
+            <div id="placements" class="tab-content">
+                <h1>Placement Management</h1>
+                
+                <div class="tabs">
+                    <div class="tab active" data-subtab="placement-active">Active Placements</div>
+                    <div class="tab" data-subtab="placement-pending">Pending</div>
+                    <div class="tab" data-subtab="placement-completed">Completed</div>
+                </div>
+                
+                <!-- Active Placements Sub-Tab -->
+                <div id="placement-active" class="sub-content active">
+                    <div class="dashboard-grid" style="grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));">
+                        <div class="stat-card">
+                            <div class="stat-title">Active Placements</div>
+                            <div class="stat-value">15</div>
+                            <div class="stat-description">Total value: £425,000</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-title">Pending Placements</div>
+                            <div class="stat-value">4</div>
+                            <div class="stat-description">Awaiting confirmation</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-title">This Month</div>
+                            <div class="stat-value">7</div>
+                            <div class="stat-description">Value: £145,000</div>
+                        </div>
+                    </div>
+                    
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Candidate</th>
+                                    <th>Position</th>
+                                    <th>Client</th>
+                                    <th>Start Date</th>
+                                    <th>Contract Type</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Michael Brown</td>
+                                    <td>Site Manager</td>
+                                    <td>BuildRight Ltd</td>
+                                    <td>Jul 1, 2025</td>
+                                    <td>Permanent</td>
+                                    <td><span class="badge badge-success">Confirmed</span></td>
+                                    <td>
+                                        <button class="action-btn outline" style="padding: 0.3rem 0.5rem; font-size: 0.8rem;">View Details</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Emma Williams</td>
+                                    <td>Project Coordinator</td>
+                                    <td>ConstructCo</td>
+                                    <td>Jul 15, 2025</td>
+                                    <td>Contract (6 months)</td>
+                                    <td><span class="badge badge-warning">Pending Docs</span></td>
+                                    <td>
+                                        <button class="action-btn outline" style="padding: 0.3rem 0.5rem; font-size: 0.8rem;">View Details</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>John Smith</td>
+                                    <td>Security Officer</td>
+                                    <td>SecureBuildings Ltd</td>
+                                    <td>Jun 20, 2025</td>
+                                    <td>Permanent</td>
+                                    <td><span class="badge badge-success">Confirmed</span></td>
+                                    <td>
+                                        <button class="action-btn outline" style="padding: 0.3rem 0.5rem; font-size: 0.8rem;">View Details</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <!-- Pending Placements Sub-Tab -->
+                <div id="placement-pending" class="sub-content">
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Candidate</th>
+                                    <th>Position</th>
+                                    <th>Client</th>
+                                    <th>Expected Start</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Laura Thompson</td>
+                                    <td>Security Officer</td>
+                                    <td>SecureBuildings Ltd</td>
+                                    <td>Jul 1, 2025</td>
+                                    <td><span class="badge badge-primary">Interview Stage</span></td>
+                                    <td>
+                                        <button class="action-btn outline" style="padding: 0.3rem 0.5rem; font-size: 0.8rem;">View Details</button>
+                                        <button class="action-btn" style="padding: 0.3rem 0.5rem; font-size: 0.8rem;">Update Status</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>David Wilson</td>
+                                    <td>Senior Construction Manager</td>
+                                    <td>BuildRight Ltd</td>
+                                    <td>Aug 1, 2025</td>
+                                    <td><span class="badge badge-warning">Offer Pending</span></td>
+                                    <td>
+                                        <button class="action-btn outline" style="padding: 0.3rem 0.5rem; font-size: 0.8rem;">View Details</button>
+                                        <button class="action-btn" style="padding: 0.3rem 0.5rem; font-size: 0.8rem;">Update Status</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <!-- Completed Placements Sub-Tab -->
+                <div id="placement-completed" class="sub-content">
+                    <div class="search-form">
+                        <input type="text" class="form-control" placeholder="Search completed placements...">
+                        <select class="form-control" style="max-width: 200px;">
+                            <option>All Time</option>
+                            <option>This Year</option>
+                            <option>Last 6 Months</option>
+                            <option>Last 3 Months</option>
+                        </select>
+                        <button class="action-btn">Search</button>
+                    </div>
+                    
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Candidate</th>
+                                    <th>Position</th>
+                                    <th>Client</th>
+                                    <th>Start Date</th>
+                                    <th>End Date</th>
+                                    <th>Fee</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Robert Davis</td>
+                                    <td>Construction Manager</td>
+                                    <td>ConstructCo</td>
+                                    <td>Jan 15, 2025</td>
+                                    <td>Jun 15, 2025</td>
+                                    <td>£7,500</td>
+                                    <td>
+                                        <button class="action-btn outline" style="padding: 0.3rem 0.5rem; font-size: 0.8rem;">View Details</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Amanda Harris</td>
+                                    <td>Recruitment Specialist</td>
+                                    <td>TalentFind Ltd</td>
+                                    <td>Mar 1, 2025</td>
+                                    <td>May 31, 2025</td>
+                                    <td>£5,200</td>
+                                    <td>
+                                        <button class="action-btn outline" style="padding: 0.3rem 0.5rem; font-size: 0.8rem;">View Details</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Clients Tab -->
+            <div id="clients" class="tab-content">
+                <h1>Client Management</h1>
+                <div class="tabs">
+                    <div class="tab active" data-subtab="client-list">Client List</div>
+                    <div class="tab" data-subtab="add-client">Add Client</div>
+                    <div class="tab" data-subtab="client-orders">Job Orders</div>
+                </div>
+                <div id="client-list" class="sub-content active">
+                    <div class="search-form">
+                        <input type="text" class="form-control" placeholder="Search clients...">
+                        <button class="action-btn">Search</button>
+                    </div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr><th>Client Name</th><th>Contact</th><th>Sector</th><th>Status</th><th>Actions</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>BuildRight Ltd</td><td>Jane Doe</td><td>Construction</td><td><span class="badge badge-success">Active</span></td><td><button class="action-btn outline">View</button></td></tr>
+                                <tr><td>SecureBuildings Ltd</td><td>Mike Smith</td><td>Security</td><td><span class="badge badge-success">Active</span></td><td><button class="action-btn outline">View</td></tr>
+                                <tr><td>TalentFind Ltd</td><td>Anna Lee</td><td>Office</td><td><span class="badge badge-warning">Pending</span></td><td><button class="action-btn outline">View</button></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div id="add-client" class="sub-content">
+                    <div class="job-form">
+                        <div class="form-group"><label>Client Name</label><input type="text" class="form-control"></div>
+                        <div class="form-group"><label>Contact Person</label><input type="text" class="form-control"></div>
+                        <div class="form-group"><label>Email</label><input type="email" class="form-control"></div>
+                        <div class="form-group"><label>Phone</label><input type="text" class="form-control"></div>
+                        <div class="form-group"><label>Sector</label><select class="form-control"><option>Construction</option><option>Security</option><option>Office</option></select></div>
+                        <button class="action-btn">Add Client</button>
+                    </div>
+                </div>
+                <div id="client-orders" class="sub-content">
+                    <div class="table-container">
+                        <table>
+                            <thead><tr><th>Order ID</th><th>Client</th><th>Job Title</th><th>Status</th><th>Date</th><th>Actions</th></tr></thead>
+                            <tbody>
+                                <tr><td>ORD-001</td><td>BuildRight Ltd</td><td>Site Manager</td><td><span class="badge badge-success">Open</span></td><td>Jun 10, 2025</td><td><button class="action-btn outline">View</button></td></tr>
+                                <tr><td>ORD-002</td><td>SecureBuildings Ltd</td><td>Security Officer</td><td><span class="badge badge-warning">Pending</span></td><td>Jun 12, 2025</td><td><button class="action-btn outline">View</button></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!-- HR Admin Tab -->
+            <div id="hr-admin" class="tab-content">
+                <h1>HR Administration</h1>
+                <div class="tabs">
+                    <div class="tab active" data-subtab="employee-records">Employee Records</div>
+                    <div class="tab" data-subtab="payroll">Payroll</div>
+                    <div class="tab" data-subtab="leave">Leave Management</div>
+                    <div class="tab" data-subtab="reviews">Performance Reviews</div>
+                </div>
+                <div id="employee-records" class="sub-content active">
+                    <div class="search-form">
+                        <input type="text" class="form-control" placeholder="Search employees...">
+                        <button class="action-btn">Search</button>
+                    </div>
+                    <div class="table-container">
+                        <table>
+                            <thead><tr><th>Name</th><th>Position</th><th>Department</th><th>Status</th><th>Actions</th></tr></thead>
+                            <tbody>
+                                <tr><td>Sarah Johnson</td><td>HR Manager</td><td>HR</td><td><span class="badge badge-success">Active</span></td><td><button class="action-btn outline">View</button></td></tr>
+                                <tr><td>Mark Reynolds</td><td>Recruitment Agent</td><td>Recruitment</td><td><span class="badge badge-success">Active</span></td><td><button class="action-btn outline">View</button></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div id="payroll" class="sub-content">
+                    <div class="table-container">
+                        <table>
+                            <thead><tr><th>Name</th><th>Position</th><th>Last Payslip</th><th>Status</th><th>Actions</th></tr></thead>
+                            <tbody>
+                                <tr><td>Sarah Johnson</td><td>HR Manager</td><td>May 2025</td><td><span class="badge badge-success">Paid</span></td><td><button class="action-btn outline">View Payslip</button></td></tr>
+                                <tr><td>Mark Reynolds</td><td>Recruitment Agent</td><td>May 2025</td><td><span class="badge badge-warning">Pending</span></td><td><button class="action-btn outline">View Payslip</button></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div id="leave" class="sub-content">
+                    <div class="table-container">
+                        <table>
+                            <thead><tr><th>Name</th><th>Position</th><th>Leave Type</th><th>From</th><th>To</th><th>Status</th><th>Actions</th></tr></thead>
+                            <tbody>
+                                <tr><td>Sarah Johnson</td><td>HR Manager</td><td>Annual</td><td>Jun 20, 2025</td><td>Jun 25, 2025</td><td><span class="badge badge-success">Approved</span></td><td><button class="action-btn outline">View</button></td></tr>
+                                <tr><td>Mark Reynolds</td><td>Recruitment Agent</td><td>Sick</td><td>Jun 10, 2025</td><td>Jun 12, 2025</td><td><span class="badge badge-warning">Pending</span></td><td><button class="action-btn outline">View</button></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div id="reviews" class="sub-content">
+                    <div class="table-container">
+                        <table>
+                            <thead><tr><th>Name</th><th>Position</th><th>Review Date</th><th>Score</th><th>Actions</th></tr></thead>
+                            <tbody>
+                                <tr><td>Sarah Johnson</td><td>HR Manager</td><td>May 2025</td><td>Excellent</td><td><button class="action-btn outline">View</button></td></tr>
+                                <tr><td>Mark Reynolds</td><td>Recruitment Agent</td><td>May 2025</td><td>Good</td><td><button class="action-btn outline">View</button></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Reports Tab -->
+            <div id="reports" class="tab-content">
+                <h1>Reports & Analytics</h1>
+                <div class="tabs">
+                    <div class="tab active" data-subtab="recruitment-reports">Recruitment</div>
+                    <div class="tab" data-subtab="placement-reports">Placements</div>
+                    <div class="tab" data-subtab="financial-reports">Financial</div>
+                </div>
+                <div id="recruitment-reports" class="sub-content active">
+                    <div class="dashboard-grid">
+                        <div class="stat-card"><div class="stat-title">Total Jobs Posted</div><div class="stat-value">120</div><div class="stat-description">This year</div></div>
+                        <div class="stat-card"><div class="stat-title">Total Applications</div><div class="stat-value">350</div><div class="stat-description">This year</div></div>
+                        <div class="stat-card"><div class="stat-title">Avg. Time to Fill</div><div class="stat-value">12 days</div><div class="stat-description">All roles</div></div>
+                    </div>
+                </div>
+                <div id="placement-reports" class="sub-content">
+                    <div class="dashboard-grid">
+                        <div class="stat-card"><div class="stat-title">Placements This Year</div><div class="stat-value">45</div><div class="stat-description">2025</div></div>
+                        <div class="stat-card"><div class="stat-title">Avg. Placement Fee</div><div class="stat-value">£5,200</div><div class="stat-description">2025</div></div>
+                        <div class="stat-card"><div class="stat-title">Top Client</div><div class="stat-value">BuildRight Ltd</div><div class="stat-description">12 placements</div></div>
+                    </div>
+                </div>
+                <div id="financial-reports" class="sub-content">
+                    <div class="dashboard-grid">
+                        <div class="stat-card"><div class="stat-title">Total Revenue</div><div class="stat-value">£325,000</div><div class="stat-description">2025</div></div>
+                        <div class="stat-card"><div class="stat-title">Outstanding Invoices</div><div class="stat-value">£18,000</div><div class="stat-description">As of June 2025</div></div>
+                        <div class="stat-card"><div class="stat-title">Commission Paid</div><div class="stat-value">£42,000</div><div class="stat-description">2025</div></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Communications Tab -->
+            <div id="communications" class="tab-content">
+                <h1>Communications</h1>
+                <div class="tabs">
+                    <div class="tab active" data-subtab="messages">Messages</div>
+                    <div class="tab" data-subtab="email-templates">Email Templates</div>
+                    <div class="tab" data-subtab="notifications">Notifications</div>
+                </div>
+                <div id="messages" class="sub-content active">
+                </div>
+                <div id="email-templates" class="sub-content">
+                    <div class="content-section">
+                        <h2>Email Templates</h2>
+                        <div class="content-card"><strong>Interview Invitation</strong><br>Dear [Candidate],<br>We are pleased to invite you for an interview...</div>
+                        <div class="content-card"><strong>Offer Letter</strong><br>Congratulations! We are delighted to offer you the position of...</div>
+                    </div>
+                </div>
+                <div id="notifications" class="sub-content">
+                    <div class="content-section">
+                        <h2>Notifications</h2>
+                        <div class="content-card">You have 3 interviews scheduled for today.</div>
+                        <div class="content-card">New candidate application received: John Smith.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Calendar Tab -->
+            <div id="calendar" class="tab-content">
+                <h1>Calendar</h1>
+                <div class="tabs">
+                    <div class="tab active" data-subtab="interview-schedule">Interview Schedule</div>
+                    <div class="tab" data-subtab="team-calendar">Team Calendar</div>
+                    <div class="tab" data-subtab="appointments">Appointments</div>
+                </div>
+                <div id="interview-schedule" class="sub-content active">
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Candidate</th>
+                                    <th>Position</th>
+                                    <th>Date & Time</th>
+                                    <th>Interview Type</th>
+                                    <th>Interviewer</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Emma Williams</td>
+                                    <td>Project Coordinator</td>
+                                    <td>Jun 16, 2025 - 2:00 PM</td>
+                                    <td>In-person</td>
+                                    <td>Sarah Johnson</td>
+                                    <td>
+                                        <button class="action-btn outline" style="padding: 0.3rem 0.5rem; font-size: 0.8rem;">View Details</button>
+                                        <button class="action-btn" style="padding: 0.3rem 0.5rem; font-size: 0.8rem;">Add Feedback</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>John Smith</td>
+                                    <td>Security Officer</td>
+                                    <td>Jun 15, 2025 - 11:00 AM</td>
+                                    <td>Video</td>
+                                    <td>Mark Reynolds</td>
+                                    <td>
+                                        <button class="action-btn outline" style="padding: 0.3rem 0.5rem; font-size: 0.8rem;">View Details</button>
+                                        <button class="action-btn" style="padding: 0.3rem 0.5rem; font-size: 0.8rem;">Add Feedback</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Michael Brown</td>
+                                    <td>Site Manager</td>
+                                    <td>Jun 15, 2025 - 3:30 PM</td>
+                                    <td>In-person</td>
+                                    <td>Sarah Johnson</td>
+                                    <td>
+                                        <button class="action-btn outline" style="padding: 0.3rem 0.5rem; font-size: 0.8rem;">View Details</button>
+                                        <button class="action-btn" style="padding: 0.3rem 0.5rem; font-size: 0.8rem;">Add Feedback</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Laura Thompson</td>
+                                    <td>Security Officer</td>
+                                    <td>Jun 17, 2025 - 10:00 AM</td>
+                                    <td>Phone</td>
+                                    <td>Mark Reynolds</td>
+                                    <td>
+                                        <button class="action-btn outline" style="padding: 0.3rem 0.5rem; font-size: 0.8rem;">View Details</button>
+                                        <button class="action-btn outline" style="padding: 0.3rem 0.5rem; font-size: 0.8rem;">Reschedule</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div id="team-calendar" class="sub-content">
+                    <div class="content-section">
+                        <h2>Team Calendar</h2>
+                        <div class="content-card">Team meeting: Jun 18, 2025 - 10:00 AM</div>
+                        <div class="content-card">HR review: Jun 20, 2025 - 2:00 PM</div>
+                    </div>
+                </div>
+                <div id="appointments" class="sub-content">
+                    <div class="content-section">
+                        <h2>Appointments</h2>
+                        <div class="content-card">Call with BuildRight Ltd: Jun 17, 2025 - 3:00 PM</div>
+                        <div class="content-card">Candidate screening: Jun 19,  2025 - 11:00 AM</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Settings Tab -->
+            <div id="settings" class="tab-content">
+                <h1>Settings</h1>
+                <div class="tabs">
+                    <div class="tab active" data-subtab="account-settings">Account</div>
+                    <div class="tab" data-subtab="preferences">Preferences</div>
+                    <div class="tab" data-subtab="system-config">System Config</div>
+                </div>
+                <div id="account-settings" class="sub-content active">
+                    <div class="job-form">
+                        <div class="form-group"><label>Name</label><input type="text" class="form-control" value="Sarah Johnson"></div>
+                        <div class="form-group"><label>Email</label><input type="email" class="form-control" value="sarah.johnson@email.com"></div>
+                        <div class="form-group"><label>Password</label><input type="password" class="form-control" value="********"></div>
+                        <button class="action-btn">Save Changes</button>
+                    </div>
+                </div>
+                <div id="preferences" class="sub-content">
+                    <div class="job-form">
+                        <div class="form-group"><label>Theme</label><select class="form-control"><option>Light</option><option>Dark</option></select></div>
+                        <div class="form-group"><label>Notifications</label><select class="form-control"><option>Enabled</option><option>Disabled</option></select></div>
+                                               <button class="action-btn">Save Preferences</button>
+                    </div>
+                </div>
+                <div id="system-config" class="sub-content">
+                    <div class="job-form">
+                        <div class="form-group"><label>System Timezone</label><input type="text" class="form-control" value="Europe/London"></div>
+                        <div class="form-group"><label>Data Export</label><button class="action-btn outline">Export Data</button></div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Tab Navigation
+        document.addEventListener('DOMContentLoaded', function() {
+            // Main tabs
+            const tabLinks = document.querySelectorAll('.sidebar-menu a');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            tabLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Remove active class from all links and contents
+                    tabLinks.forEach(link => link.classList.remove('active'));
+                    tabContents.forEach(content => content.classList.remove('active'));
+                    
+                    // Add active class to clicked link
+                    this.classList.add('active');
+                    
+                    // Show corresponding content
+                    const tabId = this.getAttribute('data-tab');
+                    document.getElementById(tabId).classList.add('active');
+                });
+            });
+            
+            // Sub-tabs
+            const subTabLinks = document.querySelectorAll('.tabs .tab');
+            const subContents = document.querySelectorAll('.sub-content');
+            
+            subTabLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    // Find parent tab group
+                    const parentTabs = this.closest('.tabs');
+                    const parentTabLinks = parentTabs.querySelectorAll('.tab');
+                    
+                    // Remove active class from all sub-tabs in this group
+                    parentTabLinks.forEach(tab => tab.classList.remove('active'));
+                    
+                    // Add active class to clicked sub-tab
+                    this.classList.add('active');
+                    
+                    // Show corresponding sub-content
+                    const subtabId = this.getAttribute('data-subtab');
+                    
+                    // Find all sub-contents within the same parent tab
+                    const parentTab = parentTabs.closest('.tab-content');
+                    const relatedSubContents = parentTab.querySelectorAll('.sub-content');
+                    
+                    // Hide all sub-contents in this group
+                    relatedSubContents.forEach(content => content.classList.remove('active'));
+                    
+                    // Show the selected sub-content
+                    document.getElementById(subtabId).classList.add('active');
+                });
+            });
+        });
+        
+        // Display current date
+        document.addEventListener('DOMContentLoaded', function() {
+            const dateDisplay = document.querySelector('.date-display');
+            if (dateDisplay) {
+                const now = new Date();
+                const options = { year: 'numeric', month: 'long', day: 'numeric' };
+                dateDisplay.textContent = now.toLocaleDateString('en-US', options);
+            }
+        });
+    </script>
+</body>
+</html>

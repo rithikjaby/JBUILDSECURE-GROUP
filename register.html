@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - J Buildsecure Group</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #002b5c;
+            --secondary: #01427a;
+            --accent: #ffe600;
+            --bg: #f8fafc;
+            --white: #fff;
+            --shadow: 0 4px 24px rgba(0,0,0,0.07);
+        }
+        body {
+            font-family: 'Inter', 'Montserrat', Arial, sans-serif;
+            background: var(--bg);
+            color: #1a2233;
+            margin: 0;
+            padding: 0;
+            line-height: 1.7;
+        }
+        header {
+            background: var(--primary);
+            color: var(--white);
+            box-shadow: var(--shadow);
+        }
+        .header-container {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1.5rem 2rem;
+        }
+        .logo {
+            font-size: 2rem;
+            font-weight: 700;
+            font-family: 'Montserrat', Arial, sans-serif;
+            letter-spacing: 1px;
+        }
+        .tagline {
+            font-size: 1rem;
+            color: #ffe600; /* Yellow for visibility and brand consistency */
+            margin-top: 0.18rem;
+            display: block;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+        }
+        nav {
+            display: flex;
+            flex-wrap: nowrap;
+            gap: 2.5rem;
+            align-items: center;
+        }
+        nav a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        .login-link {
+            background: var(--accent);
+            color: var(--primary);
+            font-weight: 700;
+            border-radius: 8px;
+            padding: 0.5rem 1.2rem;
+            margin-left: 1.5rem;
+            text-decoration: none;
+            transition: background 0.2s, color 0.2s;
+        }
+        .login-link:hover {
+            background: var(--secondary);
+            color: var(--white);
+        }
+        main {
+            max-width: 900px;
+            margin: 2rem auto;
+            background: var(--white);
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            padding: 2rem;
+        }
+        h1 {
+            font-size: 2.2rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .form-section {
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #eee;
+        }
+        .form-section:last-child {
+            border-bottom: none;
+        }
+        .form-section h2 {
+            color: var(--secondary);
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+        }
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #333;
+        }
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        input[type="tel"],
+        input[type="date"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-family: 'Inter', Arial, sans-serif;
+            font-size: 1rem;
+            background: #f9f9f9;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        input:focus,
+        select:focus,
+        textarea:focus {
+            border-color: var(--secondary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(1, 66, 122, 0.1);
+        }
+        .required::after {
+            content: " *";
+            color: #e74c3c;
+        }
+        .radio-group,
+        .checkbox-group {
+            margin: 0.5rem 0;
+        }
+        .radio-option,
+        .checkbox-option {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+        .radio-option input,
+        .checkbox-option input {
+            margin-right: 0.5rem;
+        }
+        .btn-group {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+        }
+        .btn {
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.2s, transform 0.1s;
+        }
+        .btn:active {
+            transform: translateY(1px);
+        }
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+        .btn-primary:hover {
+            background-color: #003b7a;
+        }
+        .btn-secondary {
+            background-color: #eee;
+            color: #333;
+        }
+        .btn-secondary:hover {
+            background-color: #ddd;
+        }
+        .alert {
+            background-color: #f8d7da;
+            color: #721c24;
+            padding: 0.75rem 1.25rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+        .info-text {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 0.3rem;
+        }
+        .option-tabs {
+            display: flex;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #ddd;
+        }
+        .option-tab {
+            padding: 1rem 1.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            border-bottom: 3px solid transparent;
+        }
+        .option-tab.active {
+            border-bottom: 3px solid var(--accent);
+            color: var(--primary);
+        }
+        .option-tab:hover:not(.active) {
+            background-color: #f5f5f5;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div style="display: flex; flex-direction: column; align-items: flex-start; min-width: 260px;">
+                <a href="index.html" style="text-decoration: none; color: inherit;">
+                    <span class="logo">J BuildSecure Group</span>
+                    <span class="tagline">Recruitment | Construction | Security</span>
+                </a>
+            </div>
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="about-us.html">About Us</a>
+                <a href="services.html">Services</a>
+                <a href="jobs.html">Jobs</a>
+                <a href="contact-us.html">Contact</a>
+                <a href="register.html">Register</a>
+                <a href="testimonials.html">Testimonials</a>
+                <a href="client-login.html" class="login-link">Login</a>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <h1>Register with J BuildSecure Group</h1>
+        
+        <div class="option-tabs">
+            <div class="option-tab active" onclick="switchTab('job-seeker')">I'm Looking for Work</div>
+            <div class="option-tab" onclick="switchTab('client')">I'm an Employer</div>
+        </div>
+        
+        <!-- Job Seeker Registration Form -->
+        <div id="job-seeker" class="tab-content active">
+            <form id="job-seeker-form" action="#" method="post">
+                <div class="form-section">
+                    <h2>Personal Information</h2>
+                    <div class="form-group">
+                        <label for="js-first-name" class="required">First Name</label>
+                        <input type="text" id="js-first-name" name="firstName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="js-last-name" class="required">Last Name</label>
+                        <input type="text" id="js-last-name" name="lastName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="js-email" class="required">Email Address</label>
+                        <input type="email" id="js-email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="js-phone" class="required">Phone Number</label>
+                        <input type="tel" id="js-phone" name="phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="js-address">Address</label>
+                        <input type="text" id="js-address" name="address" placeholder="Street Address">
+                    </div>
+                    <div class="form-group">
+                        <label for="js-city">City</label>
+                        <input type="text" id="js-city" name="city">
+                    </div>
+                    <div class="form-group">
+                        <label for="js-postcode" class="required">Postcode</label>
+                        <input type="text" id="js-postcode" name="postcode" required>
+                    </div>
+                </div>
+                
+                <div class="form-section">
+                    <h2>Professional Information</h2>
+                    <div class="form-group">
+                        <label for="js-job-category" class="required">Desired Job Category</label>
+                        <select id="js-job-category" name="jobCategory" required>
+                            <option value="">Select a category</option>
+                            <option value="construction">Construction</option>
+                            <option value="engineering">Engineering</option>
+                            <option value="security">Security</option>
+                            <option value="care">Care</option>
+                            <option value="hospitality">Hospitality</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="js-job-type">Preferred Job Type</label>
+                        <select id="js-job-type" name="jobType">
+                            <option value="">Select job type</option>
+                            <option value="full-time">Full-time</option>
+                            <option value="part-time">Part-time</option>
+                            <option value="contract">Contract</option>
+                            <option value="temporary">Temporary</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="js-experience">Years of Experience</label>
+                        <select id="js-experience" name="experience">
+                            <option value="">Select experience</option>
+                            <option value="0-1">Less than 1 year</option>
+                            <option value="1-3">1-3 years</option>
+                            <option value="3-5">3-5 years</option>
+                            <option value="5-10">5-10 years</option>
+                            <option value="10+">10+ years</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="js-education">Highest Education Level</label>
+                        <select id="js-education" name="education">
+                            <option value="">Select education level</option>
+                            <option value="gcse">GCSE or equivalent</option>
+                            <option value="a-level">A-Level or equivalent</option>
+                            <option value="btec">BTEC/NVQ</option>
+                            <option value="degree">Bachelor's Degree</option>
+                            <option value="masters">Master's Degree</option>
+                            <option value="phd">PhD or higher</option>
+                            <option value="other">Other qualification</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="js-skills">Key Skills (comma separated)</label>
+                        <textarea id="js-skills" name="skills" rows="3" placeholder="e.g. Carpentry, Project Management, CSCS Card"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="js-cv">Upload CV</label>
+                        <input type="file" id="js-cv" name="cv" accept=".pdf,.doc,.docx">
+                        <p class="info-text">Accepted formats: PDF, DOC, DOCX (Max 5MB)</p>
+                    </div>
+                </div>
+                
+                <div class="form-section">
+                    <h2>Account Setup</h2>
+                    <div class="form-group">
+                        <label for="js-password" class="required">Password</label>
+                        <input type="password" id="js-password" name="password" required>
+                        <p class="info-text">Must be at least 8 characters with at least one uppercase letter, number, and special character</p>
+                    </div>
+                    <div class="form-group">
+                        <label for="js-confirm-password" class="required">Confirm Password</label>
+                        <input type="password" id="js-confirm-password" name="confirmPassword" required>
+                    </div>
+                    <div class="checkbox-group">
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="js-terms" name="terms" required>
+                            <label for="js-terms" class="required">I agree to the Terms and Conditions</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="js-marketing" name="marketing">
+                            <label for="js-marketing">I wish to receive job alerts and marketing communications</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="btn-group">
+                    <button type="button" class="btn btn-secondary" onclick="resetForm('job-seeker-form')">Reset</button>
+                    <button type="submit" class="btn btn-primary">Register</button>
+                </div>
+            </form>
+        </div>
+        
+        <!-- Client/Employer Registration Form -->
+        <div id="client" class="tab-content">
+            <form id="client-form" action="#" method="post">
+                <div class="form-section">
+                    <h2>Company Information</h2>
+                    <div class="form-group">
+                        <label for="company-name" class="required">Company Name</label>
+                        <input type="text" id="company-name" name="companyName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="industry" class="required">Industry</label>
+                        <select id="industry" name="industry" required>
+                            <option value="">Select an industry</option>
+                            <option value="construction">Construction</option>
+                            <option value="engineering">Engineering</option>
+                            <option value="healthcare">Healthcare</option>
+                            <option value="hospitality">Hospitality</option>
+                            <option value="security">Security</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="company-address" class="required">Company Address</label>
+                        <input type="text" id="company-address" name="companyAddress" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="company-city" class="required">City</label>
+                        <input type="text" id="company-city" name="companyCity" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="company-postcode" class="required">Postcode</label>
+                        <input type="text" id="company-postcode" name="companyPostcode" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="company-size">Company Size</label>
+                        <select id="company-size" name="companySize">
+                            <option value="">Select size</option>
+                            <option value="1-10">1-10 employees</option>
+                            <option value="11-50">11-50 employees</option>
+                            <option value="51-200">51-200 employees</option>
+                            <option value="201-500">201-500 employees</option>
+                            <option value="501+">501+ employees</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="company-website">Company Website</label>
+                        <input type="text" id="company-website" name="companyWebsite" placeholder="https://">
+                    </div>
+                </div>
+                
+                <div class="form-section">
+                    <h2>Primary Contact</h2>
+                    <div class="form-group">
+                        <label for="contact-name" class="required">Contact Name</label>
+                        <input type="text" id="contact-name" name="contactName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="job-title" class="required">Job Title</label>
+                        <input type="text" id="job-title" name="jobTitle" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="contact-email" class="required">Email Address</label>
+                        <input type="email" id="contact-email" name="contactEmail" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="contact-phone" class="required">Phone Number</label>
+                        <input type="tel" id="contact-phone" name="contactPhone" required>
+                    </div>
+                </div>
+                
+                <div class="form-section">
+                    <h2>Service Requirements</h2>
+                    <div class="form-group">
+                        <label>Services Interested In (select all that apply):</label>
+                        <div class="checkbox-group">
+                            <div class="checkbox-option">
+                                <input type="checkbox" id="recruitment" name="services[]" value="recruitment">
+                                <label for="recruitment">Recruitment Services</label>
+                            </div>
+                            <div class="checkbox-option">
+                                <input type="checkbox" id="construction" name="services[]" value="construction">
+                                <label for="construction">Construction Services</label>
+                            </div>
+                            <div class="checkbox-option">
+                                <input type="checkbox" id="security" name="services[]" value="security">
+                                <label for="security">Security Services</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="requirements">Brief description of your requirements</label>
+                        <textarea id="requirements" name="requirements" rows="4" placeholder="Tell us what you're looking for..."></textarea>
+                    </div>
+                </div>
+                
+                <div class="form-section">
+                    <h2>Account Setup</h2>
+                    <div class="form-group">
+                        <label for="client-password" class="required">Password</label>
+                        <input type="password" id="client-password" name="password" required>
+                        <p class="info-text">Must be at least 8 characters with at least one uppercase letter, number, and special character</p>
+                    </div>
+                    <div class="form-group">
+                        <label for="client-confirm-password" class="required">Confirm Password</label>
+                        <input type="password" id="client-confirm-password" name="confirmPassword" required>
+                    </div>
+                    <div class="checkbox-group">
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="client-terms" name="terms" required>
+                            <label for="client-terms" class="required">I agree to the Terms and Conditions</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="client-marketing" name="marketing">
+                            <label for="client-marketing">I wish to receive updates and marketing communications</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="btn-group">
+                    <button type="button" class="btn btn-secondary" onclick="resetForm('client-form')">Reset</button>
+                    <button type="submit" class="btn btn-primary">Register</button>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <script>
+        function switchTab(tabId) {
+            // Hide all tab content
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Remove active class from all tabs
+            document.querySelectorAll('.option-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show the selected tab content
+            document.getElementById(tabId).classList.add('active');
+            
+            // Add active class to the clicked tab
+            event.currentTarget.classList.add('active');
+        }
+        
+        function resetForm(formId) {
+            document.getElementById(formId).reset();
+        }
+    </script>
+</body>
+</html>

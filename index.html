@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>J Buildsecure Group - Home</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #002b5c;
+            --secondary: #01427a;
+            --accent: #ffe600;
+            --bg: #f8fafc;
+            --white: #fff;
+            --shadow: 0 4px 24px rgba(0,0,0,0.07);
+        }
+        body {
+            font-family: 'Inter', 'Montserrat', Arial, sans-serif;
+            background: var(--bg);
+            color: #1a2233;
+            margin: 0;
+            padding: 0;
+            line-height: 1.7;
+        }
+
+        /* Header styles */
+        header {
+            background: linear-gradient(135deg, #003366 60%, #004b8d 100%);
+            padding-bottom: 0;
+        }
+        .header-logo-area {
+            padding: 1.5rem 0 0.7rem 0; /* Reduced padding for a more compact header */
+            text-align: center;
+        }
+        .logo {
+            font-size: 2.6rem;
+            font-weight: 800;
+            color: #fff;
+            font-family: 'Montserrat', Arial, sans-serif;
+            letter-spacing: 1.5px;
+            display: block;
+            margin-bottom: 0.15rem;
+        }
+        .tagline {
+            font-size: 1rem;
+            color: #ffe600; /* Yellow for visibility and brand consistency */
+            margin-top: 0.18rem;
+            display: block;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+        }
+        nav {
+            background: #034a85;
+            box-shadow: none;
+        }
+        nav ul {
+            display: flex;
+            flex-wrap: nowrap; /* Prevent wrapping to keep all nav items in a single line */
+            justify-content: center;
+            align-items: center;
+            gap: 2.2rem; /* More space between links for clarity */
+            margin: 0 auto;
+            padding: 0.32rem 0 0.32rem 0; /* Slightly more vertical padding for touch targets */
+            list-style: none;
+            font-family: 'Montserrat', Arial, sans-serif;
+            font-size: 1rem; /* Revert to previous size */
+            font-weight: 700;
+            max-width: 1100px;
+            overflow-x: auto; /* Allow horizontal scroll if needed on small screens */
+        }
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 700;
+            transition: color 0.2s;
+            padding: 0.22rem 0.2rem;
+            font-size: 1rem; /* Revert to previous size */
+        }
+        nav ul li.active, nav ul li:first-child a {
+            color: #ffe600;
+        }
+        nav ul li:last-child a, nav ul li:nth-last-child(2) a {
+            color: #b3c6e0;
+            font-size: 0.98rem; /* Revert to previous size */
+            opacity: 0.7;
+        }
+        /* Responsive: stack nav on small screens */
+        @media (max-width: 900px) {
+            nav ul {
+                gap: 1.1rem;
+                font-size: 1rem;
+            }
+            .logo {
+                font-size: 2rem;
+            }
+            .tagline {
+                font-size: 1rem;
+            }
+        }
+
+        /* Hero section styles */
+        .hero {
+            background: linear-gradient(90deg, #01427a 60%, #ffe600 100%);
+            color: #fff;
+            padding: 2.2rem 2rem 1.7rem 2rem;
+            text-align: left;
+        }
+        .hero h1 {
+            font-size: 1.8rem;
+            margin: 0 0 0.7rem 0;
+            font-weight: 700;
+        }
+        .hero p {
+            font-size: 1.08rem;
+            margin-bottom: 1.3rem;
+        }
+        .hero a {
+            background: #ffe600;
+            color: #002b5c;
+            font-weight: 700;
+            border-radius: 8px;
+            padding: 0.8rem 2rem;
+            text-decoration: none;
+            font-size: 1.08rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+            transition: background 0.2s, color 0.2s;
+        }
+        .hero a:hover {
+            background: #01427a;
+            color: #fff;
+        }
+        section {
+            max-width: 1100px;
+            margin: 2.5rem auto;
+            padding: 2.5rem 2rem;
+            border-radius: 16px;
+            box-shadow: 0 2px 12px rgba(0,43,92,0.06);
+        }
+        h2 {
+            color: #002b5c;
+            font-size: 2rem;
+            margin-top: 0;
+        }
+        h3 {
+            color: #01427a;
+            margin-bottom: 0.5rem;
+        }
+        h4 {
+            color: #01427a;
+            margin-bottom: 0.4rem;
+        }
+        p {
+            font-size: 1.15rem;
+            max-width: 800px;
+        }
+        .cta-section {
+            background: #01427a;
+            color: #fff;
+            padding: 2.5rem 2rem;
+            text-align: center;
+            border-radius: 16px;
+            box-shadow: 0 2px 12px rgba(0,43,92,0.10);
+        }
+        .cta-section a {
+            background: #ffe600;
+            color: #002b5c;
+            font-weight: 700;
+            border-radius: 8px;
+            padding: 1rem 2.5rem;
+            text-decoration: none;
+            font-size: 1.2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+            transition: background 0.2s, color 0.2s;
+        }
+        .cta-section a:hover {
+            background: #002b5c;
+            color: #fff;
+        }
+        .login-link {
+            background: #002b5c;
+            color: #fff;
+            padding: 0.7rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: background 0.2s, color 0.2s;
+        }
+        .login-link:hover {
+            background: #ffe600;
+            color: #002b5c;
+        }
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background: #00305e;
+            color: #fff;
+            box-shadow: var(--shadow);
+        }
+        .header-container a {
+            text-decoration: none;
+            color: inherit;
+        }
+        .header-container nav {
+            display: flex;
+            gap: 2rem;
+        }
+        .header-container nav a {
+            color: #fff;
+            font-weight: 600;
+            padding: 0.5rem 0;
+        }
+        .header-container nav a:hover {
+            color: #ffe600;
+        }
+        .header-container .logo {
+            margin: 0;
+            font-size: 2.5rem;
+            font-weight: 700;
+            font-family: 'Montserrat', Arial, sans-serif;
+            letter-spacing: 1px;
+        }
+        .header-container .tagline {
+            margin: 0;
+            font-size: 1.2rem;
+            color: #ffe600;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-logo-area">
+            <span class="logo">J BuildSecure Group</span>
+            <span class="tagline">Recruitment | Security | Construction</span>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="about-us.html">About Us</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="jobs.html">Jobs</a></li>
+                <li><a href="contact-us.html">Contact</a></li>
+                <li><a href="register.html">Register</a></li>
+                <li><a href="testimonials.html">Testimonials</a></li>
+                <li style="margin-left: auto;"><a href="client-login.html">Client Login</a></li>
+                <li><a href="employee-login.html">Employee Login</a></li>
+            </ul>
+        </nav>
+    </header>    <section class="hero">
+        <h1>Building Careers. Securing Futures.</h1>
+        <p>Specialists in Recruitment, Construction, and Security. Discover your next opportunity or trusted partner with J BuildSecure Group.</p>
+        <a href="jobs.html">View Jobs</a>
+    </section>    <!-- 2. Our Services Section -->
+    <section style="background: #f8fafc; max-width: 1100px; margin: 2.5rem auto 0 auto; border-radius: 16px; box-shadow: 0 2px 12px rgba(0,43,92,0.04); padding: 2.5rem 2rem;">
+        <h2 style="color: #002b5c; font-size: 2rem; margin-top: 0; text-align: center;">Our Services</h2>
+        <div style="display: flex; flex-wrap: wrap; gap: 2.5rem; justify-content: center;">
+            <div style="flex: 1 1 260px; min-width: 240px; background: #fff; border-radius: 14px; box-shadow: 0 2px 8px rgba(0,43,92,0.07); padding: 2rem 1.5rem; text-align: center; transition: transform 0.2s;">
+                <div style="font-size: 2.5rem; margin-bottom: 0.7rem; color: #01427a;">&#128188;</div>
+                <h3 style="color: #01427a; margin-bottom: 0.5rem;">Recruitment</h3>
+                <p style="margin: 0;">Connecting skilled professionals with top employers in multiple sectors, ensuring the right fit for every role.</p>
+            </div>
+            <div style="flex: 1 1 260px; min-width: 240px; background: #fff; border-radius: 14px; box-shadow: 0 2px 8px rgba(0,43,92,0.07); padding: 2rem 1.5rem; text-align: center; transition: transform 0.2s;">
+                <div style="font-size: 2.5rem; margin-bottom: 0.7rem; color: #01427a;">&#128736;</div>
+                <h3 style="color: #01427a; margin-bottom: 0.5rem;">Construction</h3>
+                <p style="margin: 0;">Delivering reliable construction services, from project management to skilled labor, for projects of all sizes.</p>
+            </div>
+            <div style="flex: 1 1 260px; min-width: 240px; background: #fff; border-radius: 14px; box-shadow: 0 2px 8px rgba(0,43,92,0.07); padding: 2rem 1.5rem; text-align: center; transition: transform 0.2s;">
+                <div style="font-size: 2.5rem; margin-bottom: 0.7rem; color: #01427a;">&#128274;</div>
+                <h3 style="color: #01427a; margin-bottom: 0.5rem;">Security</h3>
+                <p style="margin: 0;">Providing trusted security solutions to protect people, property, and assets across the UK.</p>
+            </div>
+        </div>
+    </section><!-- 3. Why Choose Us Section -->
+    <section style="background: #fff; max-width: 1100px; margin: 2.5rem auto 0 auto; border-radius: 16px; box-shadow: 0 2px 12px rgba(0,43,92,0.06); padding: 2.5rem 2rem;">
+        <h2 style="color: #002b5c; font-size: 2rem; margin-top: 0; text-align: center;">Why Choose Us?</h2>
+        <div style="display: flex; flex-wrap: wrap; gap: 2rem; justify-content: center;">
+            <div style="flex: 1 1 200px; min-width: 180px; background: #f8fafc; border-radius: 12px; box-shadow: 0 2px 6px rgba(0,43,92,0.05); padding: 1.5rem 1rem; text-align: center;">
+                <div style="font-size: 2rem; margin-bottom: 0.5rem; color: #01427a;">⭐</div>
+                <h4 style="color: #01427a; margin-bottom: 0.4rem;">Industry Experts</h4>
+                <p style="margin: 0; font-size: 1rem;">Specialized recruiters with deep knowledge of their industry sectors.</p>
+            </div>
+            <div style="flex: 1 1 200px; min-width: 180px; background: #f8fafc; border-radius: 12px; box-shadow: 0 2px 6px rgba(0,43,92,0.05); padding: 1.5rem 1rem; text-align: center;">
+                <div style="font-size: 2rem; margin-bottom: 0.5rem; color: #01427a;">💼</div>
+                <h4 style="color: #01427a; margin-bottom: 0.4rem;">Quality Candidates</h4>
+                <p style="margin: 0; font-size: 1rem;">Rigorous screening process ensures only top talent reaches your desk.</p>
+            </div>
+            <div style="flex: 1 1 200px; min-width: 180px; background: #f8fafc; border-radius: 12px; box-shadow: 0 2px 6px rgba(0,43,92,0.05); padding: 1.5rem 1rem; text-align: center;">
+                <div style="font-size: 2rem; margin-bottom: 0.5rem; color: #01427a;">🔄</div>
+                <h4 style="color: #01427a; margin-bottom: 0.4rem;">Streamlined Process</h4>
+                <p style="margin: 0; font-size: 1rem;">Efficient recruitment systems that save you time and resources.</p>
+            </div>
+            <div style="flex: 1 1 200px; min-width: 180px; background: #f8fafc; border-radius: 12px; box-shadow: 0 2px 6px rgba(0,43,92,0.05); padding: 1.5rem 1rem; text-align: center;">
+                <div style="font-size: 2rem; margin-bottom: 0.5rem; color: #01427a;">✅</div>
+                <h4 style="color: #01427a; margin-bottom: 0.4rem;">Proven Results</h4>
+                <p style="margin: 0; font-size: 1rem;">Exceptional track record of successful placements across all sectors.</p>
+            </div>
+        </div>
+    </section>    <!-- 4. Quick Contact/Call to Action Section -->
+    <section style="background: #01427a; color: #fff; max-width: 1100px; margin: 2.5rem auto 2.5rem auto; border-radius: 16px; box-shadow: 0 2px 12px rgba(0,43,92,0.10); padding: 2.5rem 2rem; text-align: center;">
+        <h2 style="font-size: 2rem; margin-top: 0;">Need to Hire? Looking for Work?</h2>
+        <p style="font-size: 1.15rem; max-width: 700px; margin: 0 auto 2rem auto;">Whether you're a business looking to build your team or a candidate seeking your next opportunity, J BuildSecure Group is your trusted recruitment partner.</p>
+        <div style="display: flex; flex-wrap: wrap; gap: 1.5rem; justify-content: center;">
+            <a href="contact-us.html" style="background: #ffe600; color: #002b5c; font-weight: 700; border-radius: 8px; padding: 1rem 2rem; text-decoration: none; font-size: 1.2rem; box-shadow: 0 2px 8px rgba(0,0,0,0.07); transition: background 0.2s, color 0.2s;">Contact Us</a>
+            <a href="register.html" style="background: #ffffff; color: #002b5c; font-weight: 700; border-radius: 8px; padding: 1rem 2rem; text-decoration: none; font-size: 1.2rem; box-shadow: 0 2px 8px rgba(0,0,0,0.07); transition: background 0.2s, color 0.2s;">Register Now</a>
+        </div>
+    </section>
+</body>
+</html>

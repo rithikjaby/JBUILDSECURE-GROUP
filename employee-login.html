@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Login - J BuildSecure Group</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #002b5c;
+            --secondary: #01427a;
+            --accent: #ffe600;
+            --bg: #f8fafc;
+            --white: #fff;
+            --shadow: 0 4px 24px rgba(0,0,0,0.07);
+        }
+        body {
+            font-family: 'Inter', 'Montserrat', Arial, sans-serif;
+            background: var(--bg);
+            color: #1a2233;
+            margin: 0;
+            padding: 0;
+            line-height: 1.7;
+        }        header {
+            background: var(--primary);
+            color: var(--white);
+            box-shadow: var(--shadow);
+        }
+        .header-container {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1.5rem 2rem;
+        }
+        .logo {
+            font-size: 2rem;
+            font-weight: 700;
+            font-family: 'Montserrat', Arial, sans-serif;
+            letter-spacing: 1px;
+        }
+        .tagline {
+            font-size: 1rem;
+            color: #ffe600;
+            margin-top: 0.18rem;
+            display: block;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+        }
+        nav {
+            display: flex;
+            flex-wrap: nowrap;
+            gap: 2.5rem;
+            align-items: center;
+        }
+        nav a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        .login-link {
+            background: var(--accent);
+            color: var(--primary);
+            font-weight: 700;
+            border-radius: 8px;
+            padding: 0.5rem 1.2rem;
+            margin-left: 1.5rem;
+            text-decoration: none;
+            transition: background 0.2s, color 0.2s;
+        }
+        .login-link:hover {
+            background: var(--secondary);
+            color: var(--white);
+        }
+        .login-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+        .login-btn {
+            background: transparent;
+            color: #fff;
+            border: none;
+            padding: 0.5rem 1rem;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        .login-btn:hover {
+            color: #ffe600;
+        }        main {
+            max-width: 450px;
+            margin: 2rem auto;
+            background: var(--white);
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            padding: 2rem;
+        }        h1 {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            text-align: center;
+        }form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        label {
+            font-weight: 600;
+            color: #333;
+        }        input {
+            padding: 0.7rem;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        input:focus {
+            border-color: var(--secondary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(1, 66, 122, 0.1);
+        }
+        .remember-forgot {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9rem;
+        }
+        .remember {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .forgot-password {
+            color: var(--secondary);
+            text-decoration: none;
+        }
+        .forgot-password:hover {
+            text-decoration: underline;
+        }        button {
+            background: var(--primary);
+            color: var(--white);
+            border: none;
+            border-radius: 8px;
+            padding: 0.8rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+            margin-top: 0.7rem;
+        }
+        button:hover {
+            background: var(--secondary);
+        }        .register-link {
+            text-align: center;
+            margin-top: 1rem;
+            font-size: 0.95rem;
+        }
+        .register-link a {
+            color: var(--secondary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .register-link a:hover {
+            text-decoration: underline;
+        }        .employee-portal-features {
+            margin-top: 1.5rem;
+            border-top: 1px solid #eee;
+            padding-top: 1rem;
+        }        .employee-portal-features h2 {
+            font-size: 1.3rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            text-align: center;
+            cursor: pointer;
+        }
+        .features-list {
+            display: none;
+            flex-direction: column;
+            gap: 0.7rem;
+        }
+        .features-list.show {
+            display: flex;
+        }
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            font-size: 0.95rem;
+        }
+        .feature-icon {
+            color: var(--accent);
+            background: var(--primary);
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div style="display: flex; flex-direction: column; align-items: flex-start; min-width: 260px;">
+                <a href="index.html" style="text-decoration: none; color: inherit;">
+                    <span class="logo">J BuildSecure Group</span>
+                    <span class="tagline">Recruitment | Construction | Security</span>
+                </a>
+            </div>
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="about-us.html">About Us</a>
+                <a href="services.html">Services</a>
+                <a href="jobs.html">Jobs</a>
+                <a href="contact-us.html">Contact</a>
+                <a href="register.html">Register</a>
+                <a href="testimonials.html">Testimonials</a>
+                <a href="client-login.html" class="login-link">Login</a>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <h1>Staff Portal Login</h1>
+        <form action="#" method="post">
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" required autocomplete="email">
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required autocomplete="current-password">
+            </div>            <div class="remember-forgot">
+                <div class="remember">
+                    <input type="checkbox" id="remember" name="remember">
+                    <label for="remember" style="font-weight: normal;">Remember me</label>
+                </div>
+                <a href="#" class="forgot-password">Forgot Password?</a>
+            </div>            <button type="submit" onclick="window.location.href='staff-portal.html'; return false;">Login</button>
+        </form>
+        <div class="register-link">
+            <p>Don't have an account? <a href="register.html">Register as an Employee</a></p>
+        </div>
+          <div class="employee-portal-features">
+            <h2 id="featuresToggle">Staff Portal Features</h2>            <div class="features-list" id="featuresList">
+                <div class="feature-item">
+                    <div class="feature-icon">✓</div>
+                    <div>Post and manage job listings</div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">✓</div>
+                    <div>Access candidate database and CV library</div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">✓</div>
+                    <div>Schedule and manage interviews</div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">✓</div>
+                    <div>Track placements and client relationships</div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">✓</div>
+                    <div>Generate reports and analytics</div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">✓</div>
+                    <div>Manage HR administration and payroll</div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script>
+        document.getElementById('featuresToggle').addEventListener('click', function() {
+            const featuresList = document.getElementById('featuresList');
+            featuresList.classList.toggle('show');
+            this.textContent = featuresList.classList.contains('show') ? 'Employee Portal Features ▲' : 'Employee Portal Features ▼';
+        });
+    </script>
+</body>
+</html>
